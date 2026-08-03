@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сервисный Центр | Профессиональный ремонт техники</title>
+    <style>
+        :root {
+            --primary: #007bff;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { color: var(--dark); line-height: 1.6; }
+        
+        /* Header */
+        header { background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+        .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; }
+        .nav-contacts a { color: var(--dark); text-decoration: none; font-weight: 600; margin-left: 20px; }
+        .btn { background: var(--primary); color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn:hover { background: #0056b3; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://unsplash.com') no-repeat center center/cover; color: #fff; padding: 100px 20px; text-align: center; }
+        .hero h1 { font-size: 42px; margin-bottom: 20px; }
+        .hero p { font-size: 18px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        /* Services & Prices */
+        .section { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
+        .section-title { text-align: center; margin-bottom: 40px; font-size: 32px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: var(--light); padding: 30px; border-radius: 8px; border: 1px solid #eee; text-align: center; }
+        .card h3 { margin-bottom: 15px; color: var(--dark); }
+        .price { font-size: 22px; color: var(--primary); font-weight: bold; margin: 15px 0; }
+
+        /* Order Form */
+        .form-section { background: var(--light); padding: 60px 20px; }
+        .form-container { max-width: 500px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; }
+        .form-container .btn { width: 100%; padding: 12px; font-size: 16px; }
+
+        /* Contacts & Map */
+        .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .map-container { position: relative; overflow: hidden; padding-top: 56.25%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .info-list { list-style: none; }
+        .info-list li { margin-bottom: 15px; font-size: 16px; }
+        .info-list strong { color: var(--primary); }
+
+        /* Footer */
+        footer { background: var(--dark); color: #fff; text-align: center; padding: 20px; font-size: 14px; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; text-align: center; gap: 15px; }
+            .nav-contacts { display: flex; flex-direction: column; gap: 5px; }
+            .nav-contacts a { margin: 0; }
+            .hero h1 { font-size: 30px; }
+            .contacts-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">FixMaster</a>
+            <div class="nav-contacts">
+                <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                <a href="#callback" class="btn">Записаться на ремонт</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero">
+        <h1>Ремонт цифровой техники с гарантией</h1>
+        <p>Ремонтируем смартфоны, ноутбуки и планшеты любой сложности. Бесплатная диагностика даже в случае отказа от ремонта!</p>
+        <a href="#prices" class="btn">Смотреть прайс-лист</a>
+    </section>
+
+    <!-- Популярные услуги -->
+    <section class="section" id="prices">
+        <h2 class="section-title">Наши услуги и цены</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Ремонт смартфонов</h3>
+                <p>Замена экранов, аккумуляторов, разъемов питания и восстановление после воды.</p>
+                <div class="price">от 990 ₽</div>
+            </div>
+            <div class="card">
+                <h3>Ремонт ноутбуков</h3>
+                <p>Чистка от пыли, замена термопасты, ремонт материнских плат, апгрейд (SSD/ОЗУ).</p>
+                <div class="price">от 1 490 ₽</div>
+            </div>
+            <div class="card">
+                <h3>Ремонт планшетов</h3>
+                <p>Замена тачскринов, кнопок, прошивка и устранение программных сбоев.</p>
+                <div class="price">от 1 190 ₽</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма заявки -->
+    <section class="form-section" id="callback">
+        <div class="form-container">
+            <h2 style="text-align: center; margin-bottom: 25px;">Вызвать мастера / Консультация</h2>
+            <!-- Для отправки писем замените YOUR_FORM_ID на ID из сервиса Formspree или аналогичного -->
+            <form action="https://formspree.io" method="POST">
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" name="name" placeholder="Иван" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Номер телефона</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+7 (999) 000-00-00" required>
+                </div>
+                <div class="form-group">
+                    <label for="device">Что нужно починить?</label>
+                    <select id="device" name="device">
+                        <option value="phone">Смартфон</option>
+                        <option value="laptop">Ноутбук</option>
+                        <option value="tablet">Планшет</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Отправить заявку</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Контакты и Карта -->
+    <section class="section">
+        <h2 class="section-title">Как нас найти</h2>
+        <div class="contacts-grid">
+            <div>
+                <ul class="info-list">
+                    <li><strong>Адрес:</strong> г. Москва, ул. Центральная, д. 10, офис 5</li>
+                    <li><strong>Режим работы:</strong> Ежедневно с 10:00 до 21:00</li>
+                    <li><strong>Телефон:</strong> +7 (999) 123-45-67</li>
+                    <li><strong>Email:</strong> info@yourdomain.ru</li>
+                </ul>
+            </div>
+            <div class="map-container">
+                <!-- Конструктор карт Яндекс.Карты. Замените src на эмбед вашей карты -->
+                <iframe src="https://yandex.ru" width="100%" height="450" allowfullscreen="true"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал сайта -->
+    <footer>
+        <p>&copy; 2026 FixMaster. Все права защищены. Сайт работает на GitHub Pages.</p>
+    </footer>
+
+</body>
+</html>
