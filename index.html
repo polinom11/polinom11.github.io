@@ -1,162 +1,452 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="light-red">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сервисный Центр | Профессиональный ремонт техники</title>
+    <title>Сервисный центр "Гагаринский"</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --primary: #007bff;
-            --dark: #1a1a1a;
-            --light: #f8f9fa;
-            --gray: #6c757d;
+        html {
+            scrollbar-gutter: stable;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { color: var(--dark); line-height: 1.6; }
-        
-        /* Header */
-        header { background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
-        .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; }
-        .nav-contacts a { color: var(--dark); text-decoration: none; font-weight: 600; margin-left: 20px; }
-        .btn { background: var(--primary); color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; font-weight: 600; transition: 0.3s; }
-        .btn:hover { background: #0056b3; }
 
-        /* Hero Section */
-        .hero { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://unsplash.com') no-repeat center center/cover; color: #fff; padding: 100px 20px; text-align: center; }
-        .hero h1 { font-size: 42px; margin-bottom: 20px; }
-        .hero p { font-size: 18px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        /* --- БАЗОВАЯ ТЕМА: Осциллограф Dark --- */
+        :root {
+            --bg: #171717;          
+            --bg-nav: #262626;      /* Сделали фон панели навигации светлее */
+            --text: #e5e5e5;        
+            --text-muted: #a3a3a3;  
+            --accent: #facc15;      /* Яркий желтый */
+            --selection: #333333;   
+        }
 
-        /* Services & Prices */
-        .section { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
-        .section-title { text-align: center; margin-bottom: 40px; font-size: 32px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: var(--light); padding: 30px; border-radius: 8px; border: 1px solid #eee; text-align: center; }
-        .card h3 { margin-bottom: 15px; color: var(--dark); }
-        .price { font-size: 22px; color: var(--primary); font-weight: bold; margin: 15px 0; }
+        /* --- ТЕМА ПО УМОЛЧАНИЮ: Светлая + Сигнал --- */
+        [data-theme="light-red"] {
+            --bg: #ffffff;          
+            --bg-nav: #e4e4e7;      
+            --text: #18181b;        
+            --text-muted: #52525b;  
+            --accent: #dc2626;      /* Контрастный красный маркер */
+            --selection: #e4e4e7;   
+        }
 
-        /* Order Form */
-        .form-section { background: var(--light); padding: 60px 20px; }
-        .form-container { max-width: 500px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
-        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; }
-        .form-container .btn { width: 100%; padding: 12px; font-size: 16px; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+        }
 
-        /* Contacts & Map */
-        .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-        .map-container { position: relative; overflow: hidden; padding-top: 56.25%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .info-list { list-style: none; }
-        .info-list li { margin-bottom: 15px; font-size: 16px; }
-        .info-list strong { color: var(--primary); }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 40px 20px;
+            max-width: 720px;
+            margin: 0 auto;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
 
-        /* Footer */
-        footer { background: var(--dark); color: #fff; text-align: center; padding: 20px; font-size: 14px; }
+        .prompt {
+            color: var(--accent);
+            font-weight: 700;
+            margin-right: 8px;
+        }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-container { flex-direction: column; text-align: center; gap: 15px; }
-            .nav-contacts { display: flex; flex-direction: column; gap: 5px; }
-            .nav-contacts a { margin: 0; }
-            .hero h1 { font-size: 30px; }
-            .contacts-grid { grid-template-columns: 1fr; }
+        /* Шапка */
+        header {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .sys-info {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+            letter-spacing: 0.02em;
+        }
+
+        .brand-title {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.02em;
+        }
+
+        /* TUI Навигация */
+        .nav-container {
+            width: 100%;
+            background-color: var(--bg-nav);
+            padding: 8px 12px;
+            margin: 20px 0 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav.far-nav {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        nav.far-nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            position: relative;
+            padding-left: 12px;
+            transition: color 0.15s ease;
+        }
+
+        nav.far-nav a::before {
+            content: ">";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+        }
+
+        nav.far-nav a:hover {
+            color: var(--accent);
+        }
+
+        nav.far-nav a:hover::before {
+            opacity: 1;
+        }
+
+        /* Переключатель темы без рамок и скобок */
+        .theme-toggle-raw {
+            background: transparent;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0 4px;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.15s ease;
+            user-select: none;
+        }
+
+        .theme-toggle-raw.sun-mode {
+            font-size: 0.8rem;
+        }
+
+        .theme-toggle-raw:hover {
+            color: var(--accent);
+        }
+
+        /* Разделители */
+        .hr-dashed {
+            margin: 20px 0;
+            color: var(--text-muted);
+            user-select: none;
+            overflow: hidden;
+            white-space: nowrap;
+            opacity: 0.7;
+        }
+
+        /* Главный текст */
+        .hero-text {
+            margin: 25px 0;
+        }
+
+        /* Сворачиваемые блоки */
+        details.tui-collapse {
+            margin-bottom: 15px;
+        }
+
+        details.tui-collapse summary {
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            user-select: none;
+            padding: 4px 0;
+            transition: color 0.15s ease;
+        }
+
+        details.tui-collapse summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.tui-collapse summary:hover {
+            color: var(--accent);
+        }
+
+        .collapse-content {
+            padding-top: 15px;
+        }
+
+        .photo-container {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            background-color: var(--bg-nav);
+            border: 1px solid var(--text-muted);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(40%) contrast(105%);
+        }
+
+        /* Отступ для текста под фото */
+        .photo-info-text {
+            margin-top: 15px;
+        }
+
+        .photo-info-text a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .photo-info-text a:hover {
+            color: var(--accent);
+        }
+
+        /* Услуги и стоимость */
+        .service-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 8px 6px;
+            transition: background-color 0.15s ease;
+        }
+
+        .service-row:hover {
+            background-color: var(--selection);
+        }
+
+        .service-details {
+            flex: 1;
+        }
+
+        .service-name {
+            font-weight: 700;
+        }
+
+        .service-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .service-price {
+            font-weight: 700;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+
+        /* Блог */
+        .blog-entry {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--text-muted);
+        }
+
+        .blog-entry:last-child {
+            border-bottom: none;
+        }
+
+        .blog-title {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .blog-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Подвал */
+        footer {
+            margin-top: 8px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        @media (max-width: 600px) {
+            .nav-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .service-row {
+                flex-direction: column;
+                gap: 2px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Навигация -->
+    <!-- Шапка -->
     <header>
-        <div class="nav-container">
-            <a href="#" class="logo">FixMaster</a>
-            <div class="nav-contacts">
-                <a href="tel:+79991234567">+7 (999) 123-45-67</a>
-                <a href="#callback" class="btn">Записаться на ремонт</a>
-            </div>
-        </div>
+        <div class="sys-info">[ Просто качественный ремонт ]</div>
+        <div class="brand-title">Сервисный центр "Гагаринский"</div>
     </header>
 
-    <!-- Главный баннер -->
-    <section class="hero">
-        <h1>Ремонт цифровой техники с гарантией</h1>
-        <p>Ремонтируем смартфоны, ноутбуки и планшеты любой сложности. Бесплатная диагностика даже в случае отказа от ремонта!</p>
-        <a href="#prices" class="btn">Смотреть прайс-лист</a>
+    <!-- TUI навигация -->
+    <div class="nav-container">
+        <nav class="far-nav">
+            <a href="#services">Услуги</a>
+            <a href="#prices">Стоимость</a>
+            <a href="#blog">Блог</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+        <button class="theme-toggle-raw" onclick="toggleTheme()" id="themeToggle" title="Переключить тему">☾</button>
+    </div>
+
+    <!-- Главный блок с описанием -->
+    <section class="hero-text">
+        <p style="color: var(--text-muted);">
+            Занимаемся железками, а не рекламой. Не держим секретарей, маркетологов и бухгалтеров — только тех, кто умеет паять, менять подшипники и восстанавливать технику. Вы платите за решенную проблему, а не за обслуживание нашего бизнеса.
+        </p>
     </section>
 
-    <!-- Популярные услуги -->
-    <section class="section" id="prices">
-        <h2 class="section-title">Наши услуги и цены</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Ремонт смартфонов</h3>
-                <p>Замена экранов, аккумуляторов, разъемов питания и восстановление после воды.</p>
-                <div class="price">от 990 ₽</div>
+    <!-- Блок с адресом, временем и телефонами -->
+    <div style="margin-bottom: 25px; color: var(--text-muted); font-size: 0.85rem;">
+        <div class="photo-container">
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Фото локации">
+        </div>
+        
+        <div class="photo-info-text">
+            <p><span class="prompt">></span>АДРЕС: г. Вологда, ул. Гагарина, д. 2А, корп. 1</p>
+            <p style="margin-top: 4px;"><span class="prompt">></span>ВРЕМЯ: 10:00-18:00 (пн-пт), 10:00-14:00 (сб)</p>
+            <p style="margin-top: 4px;"><span class="prompt">></span>ТЕЛ: <a href="tel:+78172585808">(8172) 58-58-08</a>, <a href="tel:+79215301010">8 (921) 530-10-10</a></p>
+        </div>
+    </div>
+
+    <!-- Услуги (скрыт) -->
+    <details class="tui-collapse" id="services" style="display: none;">
+        <summary><span class="prompt">#</span>КАТАЛОГ_УСЛУГ</summary>
+
+        <div class="collapse-content">
+            <div class="service-row">
+                <div class="service-details">
+                    <div class="service-name">Обслуживание электроинструмента</div>
+                    <div class="service-desc">Замена щеток, подшипников, редукторов, роторов. Перфораторы, УШМ, дрели.</div>
+                </div>
             </div>
-            <div class="card">
-                <h3>Ремонт ноутбуков</h3>
-                <p>Чистка от пыли, замена термопасты, ремонт материнских плат, апгрейд (SSD/ОЗУ).</p>
-                <div class="price">от 1 490 ₽</div>
+
+            <div class="service-row">
+                <div class="service-details">
+                    <div class="service-name">Ремонт мелкой бытовой техники</div>
+                    <div class="service-desc">Кофемашины, пылесосы, микроволновки, мясорубки и блендеры.</div>
+                </div>
             </div>
-            <div class="card">
-                <h3>Ремонт планшетов</h3>
-                <p>Замена тачскринов, кнопок, прошивка и устранение программных сбоев.</p>
-                <div class="price">от 1 190 ₽</div>
+
+            <div class="service-row">
+                <div class="service-details">
+                    <div class="service-name">Компонентный ремонт электроники</div>
+                    <div class="service-desc">Восстановление плат управления, замена силовых ключей и модулей питания.</div>
+                </div>
             </div>
         </div>
-    </section>
+    </details>
 
-    <!-- Форма заявки -->
-    <section class="form-section" id="callback">
-        <div class="form-container">
-            <h2 style="text-align: center; margin-bottom: 25px;">Вызвать мастера / Консультация</h2>
-            <!-- Для отправки писем замените YOUR_FORM_ID на ID из сервиса Formspree или аналогичного -->
-            <form action="https://formspree.io" method="POST">
-                <div class="form-group">
-                    <label for="name">Ваше имя</label>
-                    <input type="text" id="name" name="name" placeholder="Иван" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Номер телефона</label>
-                    <input type="tel" id="phone" name="phone" placeholder="+7 (999) 000-00-00" required>
-                </div>
-                <div class="form-group">
-                    <label for="device">Что нужно починить?</label>
-                    <select id="device" name="device">
-                        <option value="phone">Смартфон</option>
-                        <option value="laptop">Ноутбук</option>
-                        <option value="tablet">Планшет</option>
-                        <option value="other">Другое</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn">Отправить заявку</button>
-            </form>
-        </div>
-    </section>
+    <!-- Стоимость (скрыт) -->
+    <details class="tui-collapse" id="prices" style="display: none;">
+        <summary><span class="prompt">#</span>СТОИМОСТЬ</summary>
 
-    <!-- Контакты и Карта -->
-    <section class="section">
-        <h2 class="section-title">Как нас найти</h2>
-        <div class="contacts-grid">
-            <div>
-                <ul class="info-list">
-                    <li><strong>Адрес:</strong> г. Москва, ул. Центральная, д. 10, офис 5</li>
-                    <li><strong>Режим работы:</strong> Ежедневно с 10:00 до 21:00</li>
-                    <li><strong>Телефон:</strong> +7 (999) 123-45-67</li>
-                    <li><strong>Email:</strong> info@yourdomain.ru</li>
-                </ul>
+        <div class="collapse-content">
+            <div class="service-row">
+                <div class="service-details">
+                    <div class="service-name">Диагностика (без последующего ремонта)</div>
+                </div>
+                <div class="service-price">500_RUB</div>
             </div>
-            <div class="map-container">
-                <!-- Конструктор карт Яндекс.Карты. Замените src на эмбед вашей карты -->
-                <iframe src="https://yandex.ru" width="100%" height="450" allowfullscreen="true"></iframe>
+
+            <div class="service-row">
+                <div class="service-details">
+                    <div class="service-name">Ремонт электроинструмента</div>
+                </div>
+                <div class="service-price">от 800_RUB</div>
+            </div>
+
+            <div class="service-row">
+                <div class="service-details">
+                    <div class="service-name">Ремонт мелкой бытовой техники</div>
+                </div>
+                <div class="service-price">от 1200_RUB</div>
+            </div>
+
+            <div class="service-row">
+                <div class="service-details">
+                    <div class="service-name">Компонентный ремонт плат</div>
+                </div>
+                <div class="service-price">от 2000_RUB</div>
             </div>
         </div>
-    </section>
+    </details>
 
-    <!-- Подвал сайта -->
-    <footer>
-        <p>&copy; 2026 FixMaster. Все права защищены. Сайт работает на GitHub Pages.</p>
+    <!-- Блог (скрыт) -->
+    <details class="tui-collapse" id="blog" style="display: none;">
+        <summary><span class="prompt">#</span>ЗАМЕТКИ_ИНЖЕНЕРА</summary>
+
+        <div class="collapse-content">
+            <div class="blog-entry">
+                <div class="blog-title">> Почему искрит щетка у перфоратора и когда пора в сервис</div>
+                <div class="blog-meta">[TAGS: электроинструмент, профилактика] -- 2026-01-15</div>
+            </div>
+
+            <div class="blog-entry">
+                <div class="blog-title">> Чистка гидросистемы кофемашины: как избежать дорогого ремонта</div>
+                <div class="blog-meta">[TAGS: бытовая_техника, совет] -- 2026-02-03</div>
+            </div>
+        </div>
+    </details>
+
+    <!-- ПОСЛЕДНИЙ ПУНКТИР -->
+    <div class="hr-dashed">--------------------------------------------------------------------------------</div>
+
+    <!-- Подвал / Контакты -->
+    <footer id="contacts">
+        <p><span id="year">2026</span> &copy; Сервисный центр "Гагаринский"</p>
     </footer>
 
+    <script>
+        // Установка текущего года в футере
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const btn = document.getElementById('themeToggle');
+            
+            if (html.getAttribute('data-theme') === 'light-red') {
+                html.removeAttribute('data-theme');
+                btn.textContent = '☀';
+                btn.classList.add('sun-mode');
+            } else {
+                html.setAttribute('data-theme', 'light-red');
+                btn.textContent = '☾';
+                btn.classList.remove('sun-mode');
+            }
+        }
+    </script>
 </body>
 </html>
