@@ -8,6 +8,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     
+	<!-- Скрипт мгновенного применения темы (предотвращает мигание перед рендером) -->
+	<script>
+    (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light-red' || (!savedTheme && true)) {
+            document.documentElement.setAttribute('data-theme', 'light-red');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+    })();
+	</script>
+	
     <style>
         html {
             scrollbar-gutter: stable;
@@ -313,7 +325,7 @@
     <!-- TUI навигация -->
     <div class="nav-container">
         <nav class="far-nav">
-            <a href="#services">Услуги</a>
+            <a href="services.html">Услуги</a>
             <a href="#prices">Стоимость</a>
             <a href="#blog">Блог</a>
             <a href="#contacts">Контакты</a>
@@ -429,24 +441,37 @@
         <p><span id="year">2026</span> &copy; Сервисный центр "Гагаринский"</p>
     </footer>
 
-    <script>
+	<script>
         // Установка текущего года в футере
-        document.getElementById('year').textContent = new Date().getFullYear();
+		document.getElementById('year').textContent = new Date().getFullYear();
 
-        function toggleTheme() {
-            const html = document.documentElement;
-            const btn = document.getElementById('themeToggle');
-            
-            if (html.getAttribute('data-theme') === 'light-red') {
-                html.removeAttribute('data-theme');
-                btn.textContent = '☀';
-                btn.classList.add('sun-mode');
-            } else {
-                html.setAttribute('data-theme', 'light-red');
-                btn.textContent = '☾';
-                btn.classList.remove('sun-mode');
-            }
-        }
-    </script>
+		function syncThemeUI() {
+			const html = document.documentElement;
+			const btn = document.getElementById('themeToggle');
+			
+			if (html.getAttribute('data-theme') === 'light-red') {
+				btn.textContent = '☾';
+				btn.classList.remove('sun-mode');
+			} else {
+				btn.textContent = '☀';
+				btn.classList.add('sun-mode');
+			}
+		}
+
+		function toggleTheme() {
+			const html = document.documentElement;
+			if (html.getAttribute('data-theme') === 'light-red') {
+				html.removeAttribute('data-theme');
+				localStorage.setItem('theme', 'dark');
+			} else {
+				html.setAttribute('data-theme', 'light-red');
+				localStorage.setItem('theme', 'light-red');
+			}
+			syncThemeUI();
+		}
+
+		// Включение сохраненной иконки
+		syncThemeUI();
+	</script>
 </body>
 </html>
