@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги — Сервисный центр "Гагаринский"</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Скрипт мгновенного применения темы (предотвращает мигание перед рендером) -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light-red' || (!savedTheme && true)) { // По умолчанию светлая тема
+                document.documentElement.setAttribute('data-theme', 'light-red');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+            }
+        })();
+    </script>
+
+    <style>
+        html {
+            scrollbar-gutter: stable;
+        }
+
+        /* --- БАЗОВАЯ ТЕМА: Осциллограф Dark --- */
+        :root {
+            --bg: #171717;          
+            --bg-nav: #262626;      
+            --text: #e5e5e5;        
+            --text-muted: #a3a3a3;  
+            --accent: #facc15;      
+            --selection: #333333;   
+        }
+
+        /* --- ТЕМА ПО УМОЛЧАНИЮ: Светлая + Сигнал --- */
+        [data-theme="light-red"] {
+            --bg: #ffffff;          
+            --bg-nav: #e4e4e7;      
+            --text: #18181b;        
+            --text-muted: #52525b;  
+            --accent: #dc2626;      
+            --selection: #e4e4e7;   
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 40px 20px;
+            max-width: 720px;
+            margin: 0 auto;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .prompt {
+            color: var(--accent);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        /* Шапка */
+        header {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .sys-info {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+            letter-spacing: 0.02em;
+        }
+
+        .brand-title {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* TUI Навигация */
+        .nav-container {
+            width: 100%;
+            background-color: var(--bg-nav);
+            padding: 8px 12px;
+            margin: 20px 0 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav.far-nav {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        nav.far-nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            position: relative;
+            padding-left: 12px;
+            transition: color 0.15s ease;
+        }
+
+        nav.far-nav a::before {
+            content: ">";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+        }
+
+        nav.far-nav a:hover, nav.far-nav a.active {
+            color: var(--accent);
+        }
+
+        nav.far-nav a:hover::before, nav.far-nav a.active::before {
+            opacity: 1;
+        }
+
+        /* Переключатель темы */
+        .theme-toggle-raw {
+            background: transparent;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0 4px;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.15s ease;
+            user-select: none;
+        }
+
+        .theme-toggle-raw.sun-mode {
+            font-size: 0.8rem;
+        }
+
+        .theme-toggle-raw:hover {
+            color: var(--accent);
+        }
+
+        /* Разделитель */
+        .hr-dashed {
+            margin: 20px 0;
+            color: var(--text-muted);
+            user-select: none;
+            overflow: hidden;
+            white-space: nowrap;
+            opacity: 0.7;
+        }
+
+        /* Блок с услугами */
+        .services-section {
+            margin: 25px 0;
+        }
+
+        .category-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 20px 0 10px 0;
+            color: var(--text);
+        }
+
+        .service-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 8px 6px;
+            transition: background-color 0.15s ease;
+        }
+
+        .service-row:hover {
+            background-color: var(--selection);
+        }
+
+        .service-details {
+            flex: 1;
+        }
+
+        .service-name {
+            font-weight: 700;
+        }
+
+        .service-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        footer {
+            margin-top: 8px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        @media (max-width: 600px) {
+            .nav-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .service-row {
+                flex-direction: column;
+                gap: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="sys-info">[ Просто качественный ремонт ]</div>
+        <div class="brand-title"><a href="index.html">Сервисный центр "Гагаринский"</a></div>
+    </header>
+
+    <!-- TUI навигация -->
+    <div class="nav-container">
+        <nav class="far-nav">
+            <a href="index.html">Главная</a>
+            <a href="services.html" class="active">Услуги</a>
+            <a href="index.html#prices">Стоимость</a>
+            <a href="index.html#blog">Блог</a>
+            <a href="index.html#contacts">Контакты</a>
+        </nav>
+        <button class="theme-toggle-raw" onclick="toggleTheme()" id="themeToggle" title="Переключить тему">☾</button>
+    </div>
+
+    <!-- Основной контент страницы услуг -->
+    <main class="services-section">
+        <p style="color: var(--text-muted); margin-bottom: 20px;">
+            Выполняем профессиональный ремонт и техническое обслуживание инструмента и техники. Все работы производятся опытными инженерами с использованием качественных комплектующих.
+        </p>
+
+        <div class="category-title"><span class="prompt">#</span>ЭЛЕКТРОИНСТРУМЕНТ</div>
+        <div class="service-row">
+            <div class="service-details">
+                <div class="service-name">Обслуживание перфораторов и отбойных молотков</div>
+                <div class="service-desc">Замена щеток, патронов SDS, роторов, статоров, элементов редуктора и смазки.</div>
+            </div>
+        </div>
+        <div class="service-row">
+            <div class="service-details">
+                <div class="service-name">Ремонт УШМ (болгарок) и штроборезов</div>
+                <div class="service-desc">Замена подшипников, шпинделей, кнопок пуска, восстановление повреждённых кабелей.</div>
+            </div>
+        </div>
+        <div class="service-row">
+            <div class="service-details">
+                <div class="service-name">Ремонт аккумуляторов и шуруповертов</div>
+                <div class="service-desc">Восстановление или замена банок в аккумуляторных блоках (Li-ion, Ni-Cd), ремонт двигателей.</div>
+            </div>
+        </div>
+
+        <div class="category-title" style="margin-top: 30px;"><span class="prompt">#</span>МЕЛКАЯ_БЫТОВАЯ_ТЕХНИКА</div>
+        <div class="service-row">
+            <div class="service-details">
+                <div class="service-name">Ремонт и обслуживание кофемашин</div>
+                <div class="service-desc">Чистка гидросистемы, декальцинация, ремонт заварочных блоков, замена прокладок и помп.</div>
+            </div>
+        </div>
+        <div class="service-row">
+            <div class="service-details">
+                <div class="service-name">Ремонт пылесосов и роботов-пылесосов</div>
+                <div class="service-desc">Замена турбин, плат управления, аккумуляторов, чистка и восстановление механики.</div>
+            </div>
+        </div>
+        <div class="service-row">
+            <div class="service-details">
+                <div class="service-name">Кухонная техника</div>
+                <div class="service-desc">Ремонт мясорубок, блендеров, кухонных комбайнов, микроволновок (замена шестерен, муфт, двигателей).</div>
+            </div>
+        </div>
+
+        <div class="category-title" style="margin-top: 30px;"><span class="prompt">#</span>ЭЛЕКТРОНИКА_И_ПЛАТЫ</div>
+        <div class="service-row">
+            <div class="service-details">
+                <div class="service-name">Компонентный ремонт плат управления</div>
+                <div class="service-desc">Поиск неисправностей, замена пробитых силовых ключей, конденсаторов, контроллеров.</div>
+            </div>
+        </div>
+        <div class="service-row">
+            <div class="service-details">
+                <div class="service-name">Восстановление техники после залития / перепадов напряжения</div>
+                <div class="service-desc">Ультразвуковая чистка, пайка поврежденных дорожек, замена сгоревших цепей питания.</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ПУНКТИР -->
+    <div class="hr-dashed">--------------------------------------------------------------------------------</div>
+
+    <!-- Подвал -->
+    <footer>
+        <p><span id="year">2026</span> &copy; Сервисный центр "Гагаринский"</p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function syncThemeUI() {
+            const html = document.documentElement;
+            const btn = document.getElementById('themeToggle');
+            if (html.getAttribute('data-theme') === 'light-red') {
+                btn.textContent = '☾';
+                btn.classList.remove('sun-mode');
+            } else {
+                btn.textContent = '☀';
+                btn.classList.add('sun-mode');
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.getAttribute('data-theme') === 'light-red') {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.setAttribute('data-theme', 'light-red');
+                localStorage.setItem('theme', 'light-red');
+            }
+            syncThemeUI();
+        }
+
+        // Синхронизируем иконку кнопки при загрузке
+        syncThemeUI();
+    </script>
+</body>
+</html>
