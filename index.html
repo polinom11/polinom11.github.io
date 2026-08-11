@@ -8,8 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     
-	<!-- Скрипт мгновенного применения темы (предотвращает мигание перед рендером) -->
-	<script>
+    <script>
     (function() {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'light-red' || (!savedTheme && true)) {
@@ -18,31 +17,33 @@
             document.documentElement.removeAttribute('data-theme');
         }
     })();
-	</script>
+    </script>
 	
     <style>
         html {
             scrollbar-gutter: stable;
         }
 
-        /* --- БАЗОВАЯ ТЕМА: Осциллограф Dark --- */
         :root {
             --bg: #171717;          
-            --bg-nav: #262626;      /* Сделали фон панели навигации светлее */
+            --bg-nav: #262626;      
             --text: #e5e5e5;        
             --text-muted: #a3a3a3;  
-            --accent: #facc15;      /* Яркий желтый */
+            --accent: #facc15;      
             --selection: #333333;   
+            --dot-color: #52525b;
+            --border-active: #ffffff;
         }
 
-        /* --- ТЕМА ПО УМОЛЧАНИЮ: Светлая + Сигнал --- */
         [data-theme="light-red"] {
             --bg: #ffffff;          
             --bg-nav: #e4e4e7;      
             --text: #18181b;        
             --text-muted: #52525b;  
-            --accent: #dc2626;      /* Контрастный красный маркер */
+            --accent: #dc2626;      
             --selection: #e4e4e7;   
+            --dot-color: #71717a;
+            --border-active: #000000;
         }
 
         * {
@@ -71,7 +72,6 @@
             margin-right: 8px;
         }
 
-        /* Шапка */
         header {
             margin-bottom: 25px;
             text-align: left;
@@ -90,7 +90,11 @@
             letter-spacing: -0.02em;
         }
 
-        /* TUI Навигация */
+        .brand-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+
         .nav-container {
             width: 100%;
             background-color: var(--bg-nav);
@@ -129,15 +133,14 @@
             transition: opacity 0.15s ease;
         }
 
-        nav.far-nav a:hover {
+        nav.far-nav a:hover, nav.far-nav a.active {
             color: var(--accent);
         }
 
-        nav.far-nav a:hover::before {
+        nav.far-nav a:hover::before, nav.far-nav a.active::before {
             opacity: 1;
         }
 
-        /* Переключатель темы без рамок и скобок */
         .theme-toggle-raw {
             background: transparent;
             color: var(--text);
@@ -162,22 +165,18 @@
             color: var(--accent);
         }
 
-        /* Разделители */
         .hr-dashed {
             margin: 20px 0;
-            color: var(--text-muted);
-            user-select: none;
-            overflow: hidden;
-            white-space: nowrap;
-            opacity: 0.7;
+            height: 1px;
+            background-image: linear-gradient(to right, var(--dot-color) 33%, rgba(255,255,255,0) 0%);
+            background-size: 5px 1px;
+            background-repeat: repeat-x;
         }
 
-        /* Главный текст */
         .hero-text {
             margin: 25px 0;
         }
 
-        /* Сворачиваемые блоки */
         details.tui-collapse {
             margin-bottom: 15px;
         }
@@ -226,7 +225,6 @@
             filter: grayscale(40%) contrast(105%);
         }
 
-        /* Отступ для текста под фото */
         .photo-info-text {
             margin-top: 15px;
         }
@@ -240,7 +238,6 @@
             color: var(--accent);
         }
 
-        /* Услуги и стоимость */
         .service-row {
             display: flex;
             justify-content: space-between;
@@ -273,7 +270,6 @@
             white-space: nowrap;
         }
 
-        /* Блог */
         .blog-entry {
             padding: 8px 0;
             border-bottom: 1px dashed var(--text-muted);
@@ -294,12 +290,28 @@
             margin-top: 2px;
         }
 
-        /* Подвал */
         footer {
             margin-top: 8px;
             color: var(--text-muted);
             font-size: 0.85rem;
             text-align: left;
+        }
+
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .status-online {
+            color: #22c55e;
+            font-weight: 700;
+        }
+
+        .status-offline {
+            color: #ef4444;
+            font-weight: 700;
         }
 
         @media (max-width: 600px) {
@@ -316,16 +328,14 @@
 </head>
 <body>
 
-    <!-- Шапка -->
     <header>
         <div class="sys-info">[ Просто качественный ремонт ]</div>
-        <div class="brand-title">Сервисный центр "Гагаринский"</div>
+        <div class="brand-title"><a href="index.html">Сервисный центр "Гагаринский"</a></div>
     </header>
 
-    <!-- TUI навигация -->
     <div class="nav-container">
         <nav class="far-nav">
-			<a href="index.html">Главная</a>
+            <a href="index.html" class="active">Главная</a>
             <a href="services.html">Услуги</a>
             <a href="#prices">Стоимость</a>
             <a href="#blog">Блог</a>
@@ -334,14 +344,12 @@
         <button class="theme-toggle-raw" onclick="toggleTheme()" id="themeToggle" title="Переключить тему">☾</button>
     </div>
 
-    <!-- Главный блок с описанием -->
     <section class="hero-text">
         <p style="color: var(--text-muted);">
             Занимаемся железками, а не рекламой. Не держим секретарей, маркетологов и бухгалтеров — только тех, кто умеет паять, менять подшипники и восстанавливать технику. Вы платите за решенную проблему, а не за обслуживание нашего бизнеса.
         </p>
     </section>
 
-    <!-- Блок с адресом, временем и телефонами -->
     <div style="margin-bottom: 25px; color: var(--text-muted); font-size: 0.85rem;">
         <div class="photo-container">
             <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Фото локации">
@@ -354,10 +362,8 @@
         </div>
     </div>
 
-    <!-- Услуги (скрыт) -->
     <details class="tui-collapse" id="services" style="display: none;">
         <summary><span class="prompt">#</span>КАТАЛОГ_УСЛУГ</summary>
-
         <div class="collapse-content">
             <div class="service-row">
                 <div class="service-details">
@@ -365,14 +371,12 @@
                     <div class="service-desc">Замена щеток, подшипников, редукторов, роторов. Перфораторы, УШМ, дрели.</div>
                 </div>
             </div>
-
             <div class="service-row">
                 <div class="service-details">
                     <div class="service-name">Ремонт мелкой бытовой техники</div>
                     <div class="service-desc">Кофемашины, пылесосы, микроволновки, мясорубки и блендеры.</div>
                 </div>
             </div>
-
             <div class="service-row">
                 <div class="service-details">
                     <div class="service-name">Компонентный ремонт электроники</div>
@@ -382,10 +386,8 @@
         </div>
     </details>
 
-    <!-- Стоимость (скрыт) -->
     <details class="tui-collapse" id="prices" style="display: none;">
         <summary><span class="prompt">#</span>СТОИМОСТЬ</summary>
-
         <div class="collapse-content">
             <div class="service-row">
                 <div class="service-details">
@@ -393,21 +395,18 @@
                 </div>
                 <div class="service-price">500_RUB</div>
             </div>
-
             <div class="service-row">
                 <div class="service-details">
                     <div class="service-name">Ремонт электроинструмента</div>
                 </div>
                 <div class="service-price">от 800_RUB</div>
             </div>
-
             <div class="service-row">
                 <div class="service-details">
                     <div class="service-name">Ремонт мелкой бытовой техники</div>
                 </div>
                 <div class="service-price">от 1200_RUB</div>
             </div>
-
             <div class="service-row">
                 <div class="service-details">
                     <div class="service-name">Компонентный ремонт плат</div>
@@ -417,16 +416,13 @@
         </div>
     </details>
 
-    <!-- Блог (скрыт) -->
     <details class="tui-collapse" id="blog" style="display: none;">
         <summary><span class="prompt">#</span>ЗАМЕТКИ_ИНЖЕНЕРА</summary>
-
         <div class="collapse-content">
             <div class="blog-entry">
                 <div class="blog-title">> Почему искрит щетка у перфоратора и когда пора в сервис</div>
                 <div class="blog-meta">[TAGS: электроинструмент, профилактика] -- 2026-01-15</div>
             </div>
-
             <div class="blog-entry">
                 <div class="blog-title">> Чистка гидросистемы кофемашины: как избежать дорогого ремонта</div>
                 <div class="blog-meta">[TAGS: бытовая_техника, совет] -- 2026-02-03</div>
@@ -434,45 +430,60 @@
         </div>
     </details>
 
-    <!-- ПОСЛЕДНИЙ ПУНКТИР -->
-    <div class="hr-dashed">--------------------------------------------------------------------------------</div>
+    <div class="hr-dashed"></div>
 
-    <!-- Подвал / Контакты -->
     <footer id="contacts">
-        <p><span id="year">2026</span> &copy; Сервисный центр "Гагаринский"</p>
+        <div class="footer-status">
+            <span class="prompt">$</span>status: <span id="statusIndicator" class="status-online">ONLINE</span> | <span id="year">2026</span> &copy; Сервисный центр "Гагаринский"
+        </div>
     </footer>
 
-	<script>
-        // Установка текущего года в футере
-		document.getElementById('year').textContent = new Date().getFullYear();
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-		function syncThemeUI() {
-			const html = document.documentElement;
-			const btn = document.getElementById('themeToggle');
-			
-			if (html.getAttribute('data-theme') === 'light-red') {
-				btn.textContent = '☾';
-				btn.classList.remove('sun-mode');
-			} else {
-				btn.textContent = '☀';
-				btn.classList.add('sun-mode');
-			}
-		}
+        function syncThemeUI() {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light-red';
+            const btn = document.getElementById('themeToggle');
+            btn.textContent = isLight ? '☾' : '☀';
+            btn.classList.toggle('sun-mode', !isLight);
+        }
 
-		function toggleTheme() {
-			const html = document.documentElement;
-			if (html.getAttribute('data-theme') === 'light-red') {
-				html.removeAttribute('data-theme');
-				localStorage.setItem('theme', 'dark');
-			} else {
-				html.setAttribute('data-theme', 'light-red');
-				localStorage.setItem('theme', 'light-red');
-			}
-			syncThemeUI();
-		}
+        function toggleTheme() {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light-red';
+            const newTheme = isLight ? 'dark' : 'light-red';
+            
+            if (newTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light-red');
+            }
+            localStorage.setItem('theme', newTheme);
+            syncThemeUI();
+        }
 
-		// Включение сохраненной иконки
-		syncThemeUI();
-	</script>
+        function checkWorkingHours() {
+            const now = new Date();
+            const day = now.getDay(); 
+            const time = now.getHours() * 100 + now.getMinutes();
+            
+            const holidays = ["01-01","01-02","01-03","01-04","01-05","01-06","01-07","01-08","02-23","03-08","05-01","05-09","06-12","11-04"];
+            const today = String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+
+            const isOpen = !holidays.includes(today) && (
+                (day >= 1 && day <= 5 && time >= 1000 && time < 1800) ||
+                (day === 6 && time >= 1000 && time < 1400)
+            );
+
+            const el = document.getElementById('statusIndicator');
+            if (el) {
+                el.textContent = isOpen ? 'ONLINE' : 'OFFLINE';
+                el.classList.toggle('status-online', isOpen);
+                el.classList.toggle('status-offline', !isOpen);
+            }
+        }
+
+        syncThemeUI();
+        checkWorkingHours();
+    </script>
 </body>
 </html>
