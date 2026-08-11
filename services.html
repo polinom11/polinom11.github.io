@@ -572,6 +572,570 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light-red' || (!savedTheme && true)) {
+                document.documentElement.setAttribute('data-theme', 'light-red');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+            }
+        })();
+    </script>
+
+    <style>
+        html {
+            scrollbar-gutter: stable;
+        }
+
+        :root {
+            --bg: #171717;          
+            --bg-nav: #262626;      
+            --text: #e5e5e5;        
+            --text-muted: #a3a3a3;  
+            --accent: #facc15;      
+            --selection: #333333;   
+            --dot-color: #52525b;
+            --border-active: #ffffff;
+        }
+
+        [data-theme="light-red"] {
+            --bg: #ffffff;          
+            --bg-nav: #e4e4e7;      
+            --text: #18181b;        
+            --text-muted: #52525b;  
+            --accent: #dc2626;      
+            --selection: #f4f4f5;   
+            --dot-color: #71717a;
+            --border-active: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 40px 20px;
+            max-width: 720px;
+            margin: 0 auto;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .prompt {
+            color: var(--accent);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        header {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .sys-info {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+            letter-spacing: 0.02em;
+        }
+
+        .brand-title {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .nav-container {
+            width: 100%;
+            background-color: var(--bg-nav);
+            padding: 8px 12px;
+            margin: 20px 0 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav.far-nav {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        nav.far-nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            position: relative;
+            padding-left: 12px;
+            transition: color 0.15s ease;
+        }
+
+        nav.far-nav a::before {
+            content: ">";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+        }
+
+        nav.far-nav a:hover, nav.far-nav a.active {
+            color: var(--accent);
+        }
+
+        nav.far-nav a:hover::before, nav.far-nav a.active::before {
+            opacity: 1;
+        }
+
+        .theme-toggle-raw {
+            background: transparent;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0 4px;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.15s ease;
+            user-select: none;
+        }
+
+        .theme-toggle-raw.sun-mode {
+            font-size: 0.8rem;
+        }
+
+        .theme-toggle-raw:hover {
+            color: var(--accent);
+        }
+
+        .services-hero {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .services-section {
+            margin: 25px 0;
+        }
+
+        .categories-cmd {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        details.tui-collapse {
+            margin-bottom: 12px;
+            position: relative;
+            border: 1px dashed var(--dot-color);
+        }
+
+        details.tui-collapse:not([open]):hover {
+            border: 1px solid var(--border-active);
+        }
+
+        details.tui-collapse[open] {
+            border: 1px solid var(--border-active);
+        }
+
+        details.tui-collapse summary {
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+            padding: 9px 14px;
+            color: var(--text);
+            transition: background-color 0.15s ease;
+        }
+
+        details.tui-collapse summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.tui-collapse summary:hover {
+            background-color: var(--selection);
+        }
+
+        details.tui-collapse summary::after {
+            content: "[+] EXPANSE";
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        details.tui-collapse summary:hover::after {
+            color: var(--text);
+        }
+
+        details.tui-collapse[open] summary::after {
+            content: "[-] COLLAPSE";
+            color: var(--accent);
+        }
+
+        .collapse-content {
+            padding: 12px 14px 16px 14px;
+            background-image: linear-gradient(to right, var(--dot-color) 33%, rgba(255,255,255,0) 0%);
+            background-position: top;
+            background-size: 5px 1px;
+            background-repeat: repeat-x;
+        }
+
+        .category-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .service-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 8px 6px;
+            transition: background-color 0.15s ease;
+        }
+
+        .service-row:hover {
+            background-color: var(--selection);
+        }
+
+        .service-details {
+            flex: 1;
+        }
+
+        .service-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .service-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .hr-dashed {
+            margin: 20px 0;
+            height: 1px;
+            background-image: linear-gradient(to right, var(--dot-color) 33%, rgba(255,255,255,0) 0%);
+            background-size: 5px 1px;
+            background-repeat: repeat-x;
+        }
+
+        footer {
+            margin-top: 8px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .status-online {
+            color: #22c55e;
+            font-weight: 700;
+        }
+
+        .status-offline {
+            color: #ef4444;
+            font-weight: 700;
+        }
+
+        @media (max-width: 600px) {
+            .nav-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .service-row {
+                flex-direction: column;
+                gap: 2px;
+            }
+            details.tui-collapse summary::after {
+                content: "[+]";
+            }
+            details.tui-collapse[open] summary::after {
+                content: "[-]";
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="sys-info">[ Просто качественный ремонт ]</div>
+        <div class="brand-title"><a href="index.html">Сервисный центр "Гагаринский"</a></div>
+    </header>
+
+    <div class="nav-container">
+        <nav class="far-nav">
+            <a href="index.html">Главная</a>
+            <a href="services.html" class="active">Услуги</a>
+            <a href="index.html#prices">Стоимость</a>
+            <a href="index.html#blog">Блог</a>
+            <a href="index.html#contacts">Контакты</a>
+        </nav>
+        <button class="theme-toggle-raw" onclick="toggleTheme()" id="themeToggle" title="Переключить тему">☾</button>
+    </div>
+
+    <main class="services-section">
+        <div class="services-hero">
+            <p style="margin-bottom: 8px;">
+                <span class="prompt">$</span>cat /etc/services/rules.conf
+            </p>
+            <div>
+                <p>- Диагностика и согласование стоимости ДО начала работ.</p>
+                <p>- Предупредим, если ремонт экономически нецелесообразен.</p>
+                <p>- Официальная гарантия на выполненные работы.</p>
+            </div>
+        </div>
+
+        <p class="categories-cmd">
+            <span class="prompt">$</span>tree /services/categories/
+        </p>
+
+        <details class="tui-collapse">
+            <summary>
+                <div>
+                    <span class="prompt">#</span>КРУПНАЯ_БЫТОВАЯ_ТЕХНИКА
+                </div>
+            </summary>
+            <div class="collapse-content">
+                <div class="category-desc">
+                    Стиральные машины, кухонные плиты, варочные панели, духовые шкафы, вытяжки, микроволновые печи, водонагреватели.
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт и обслуживание стиральных машин</div>
+                        <div class="service-desc">Замена нагревательных элементов, насосов, ремонт электронных блоков, замена подшипников.</div>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт свч-печей (микроволновок)</div>
+                        <div class="service-desc">Замена магнетронов, слюды, ремонт плат, подбор тарелок и коуплеров.</div>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт духовых шкафов</div>
+                        <div class="service-desc">Замена нагревательных элементов, переключателей режимов, таймеров, ремонт плат.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <details class="tui-collapse">
+            <summary>
+                <div>
+                    <span class="prompt">#</span>МЕЛКАЯ_БЫТОВАЯ_ТЕХНИКА
+                </div>
+            </summary>
+            <div class="collapse-content">
+                <div class="category-desc">
+                    Мультиварки, блендеры, миксеры, тостеры, чайники, кофеварки, кофемашины, соковыжималки, мясорубки, грили, вафельницы, фритюрницы, хлебопечки, кухонные комбайны, сушилки для овощей, утюги, отпариватели, парогенераторы, пылесосы, фены, плойки, увлажнители воздуха, очистители воздуха, вентиляторы, обогреватели.
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт и обслуживание парогенераторов</div>
+                        <div class="service-desc">Замена помп и клапанов, ремонт электронных блоков, профилактика.</div>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт напольных и вертикальных пылесосов</div>
+                        <div class="service-desc">Замена турбин, аккумуляторов, ремонт плат управления и турбо-щеток.</div>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Кухонная техника</div>
+                        <div class="service-desc">Замена шестеренок на мясорубках, ремонт кухонных комбайнов, замена приводных ремней на хлебопечках.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <details class="tui-collapse">
+            <summary>
+                <div>
+                    <span class="prompt">#</span>ЭЛЕКТРОИНСТРУМЕНТ
+                </div>
+            </summary>
+            <div class="collapse-content">
+                <div class="category-desc">
+                    Аккумуляторный инструмент (все виды), граверы (бормашины), дрели, краскопульты, лобзики, миксеры, мультитулы (мфу), реноваторы, отбойные молотки, перфораторы, пилы монтажные (отрезные), пилы торцовочные, пилы цепные, пилы циркулярные (дисковые), плиткорезы, плоскошлифовальные (вибрационные) машины, рубанки, строительные пылесосы, точильные станки, углошлифовальные машины (ушм), фены строительные, фрезеры, шлифмашины ленточные, шлифмашины эксцентриковые (орбитальные), штроборезы, шуруповёрты сетевые, электротриммеры.
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Обслуживание перфораторов и отбойных молотков</div>
+                        <div class="service-desc">Замена щеток, патронов SDS, роторов, статоров, элементов редуктора и смазки.</div>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт УШМ (болгарок) и штроборезов</div>
+                        <div class="service-desc">Замена подшипников, шпинделей, кнопок пуска, восстановление повреждённых кабелей.</div>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт аккумуляторов и шуруповертов</div>
+                        <div class="service-desc">Восстановление или замена банок в аккумуляторных блоках (Li-ion, Ni-Cd), ремонт двигателей.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <details class="tui-collapse">
+            <summary>
+                <div>
+                    <span class="prompt">#</span>НАСОСНОЕ_ОБОРУДОВАНИЕ
+                </div>
+            </summary>
+            <div class="collapse-content">
+                <div class="category-desc">
+                    Вихревые насосы, гидроаккумуляторы, дренажные насосы, насосные станции, поверхностные насосы, погружные насосы, центробежные насосы, электронные блоки автоматики.
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт насосных станций</div>
+                        <div class="service-desc">Замена диффузоров, трубок вентури, рабочих колес, манометров, гидроаккумуляторов, настройка реле давления.</div>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт дренажных насосов</div>
+                        <div class="service-desc">Замена поплавков (лягушек), торцевых уплотнений, рабочих колес, кабеля питания.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <details class="tui-collapse">
+            <summary>
+                <div>
+                    <span class="prompt">#</span>ДРУГОЕ_ОБОРУДОВАНИЕ
+                </div>
+            </summary>
+            <div class="collapse-content">
+                <div class="category-desc">
+                    Инверторные сварочные аппараты, полуавтоматы, паяльники пластиковых труб, промышленные мясорубки, блендеры, фритюрницы, профессиональные парогенераторы.
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт инверторных сварочных аппаратов</div>
+                        <div class="service-desc">Ремонт на компонентном уровне, замена пробитых силовых ключей, конденсаторов, контроллеров.</div>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт профессиональных парогенераторов</div>
+                        <div class="service-desc">Замена клапанов, прессостатов, терморегуляторов, ремонт проводки.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+    </main>
+
+    <div class="hr-dashed"></div>
+
+    <footer id="contacts">
+        <div class="footer-status">
+            <span class="prompt">$</span>status: <span id="statusIndicator" class="status-online">ONLINE</span> | <span id="year">2026</span> &copy; Сервисный центр "Гагаринский"
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function syncThemeUI() {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light-red';
+            const btn = document.getElementById('themeToggle');
+            btn.textContent = isLight ? '☾' : '☀';
+            btn.classList.toggle('sun-mode', !isLight);
+        }
+
+        function toggleTheme() {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light-red';
+            const newTheme = isLight ? 'dark' : 'light-red';
+            
+            if (newTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light-red');
+            }
+            localStorage.setItem('theme', newTheme);
+            syncThemeUI();
+        }
+
+        function checkWorkingHours() {
+            const now = new Date();
+            const day = now.getDay(); 
+            const time = now.getHours() * 100 + now.getMinutes();
+            
+            const holidays = ["01-01","01-02","01-03","01-04","01-05","01-06","01-07","01-08","02-23","03-08","05-01","05-09","06-12","11-04"];
+            const today = String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+
+            const isOpen = !holidays.includes(today) && (
+                (day >= 1 && day <= 5 && time >= 1000 && time < 1800) ||
+                (day === 6 && time >= 1000 && time < 1400)
+            );
+
+            const el = document.getElementById('statusIndicator');
+            if (el) {
+                el.textContent = isOpen ? 'ONLINE' : 'OFFLINE';
+                el.classList.toggle('status-online', isOpen);
+                el.classList.toggle('status-offline', !isOpen);
+            }
+        }
+
+        syncThemeUI();
+        checkWorkingHours();
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги — Сервисный центр "Гагаринский"</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <!-- Скрипт мгновенного применения темы (предотвращает мигание перед рендером) -->
     <script>
         (function() {
