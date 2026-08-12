@@ -28,7 +28,7 @@
             --bg: #171717;          
             --bg-nav: #262626;      
             --text: #e5e5e5;        
-            --text-muted: #a3a3a3;  
+            --text-muted: #a3a3a3; /* Тёмная тема: #a3a3a3 */ 
             --accent: #facc15;      
             --selection: #333333;   
             --dot-color: #52525b;
@@ -39,7 +39,7 @@
             --bg: #ffffff;          
             --bg-nav: #e4e4e7;      
             --text: #18181b;        
-            --text-muted: #52525b;  
+            --text-muted: #52525b; /* Светлая тема: #52525b */ 
             --accent: #dc2626;      
             --selection: #f4f4f5;   
             --dot-color: #71717a;
@@ -72,8 +72,18 @@
             margin-right: 8px;
         }
 
+        .term-command {
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: #52525b; 
+        }
+
+        [data-theme="light-red"] .term-command {
+            color: #b5b5b5;
+        }
+
         header {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-align: left;
         }
 
@@ -166,20 +176,19 @@
         }
 
         .services-hero {
-            color: var(--text-muted);
+            color: var(--text);
             margin-bottom: 25px;
             font-size: 0.95rem;
             line-height: 1.5;
         }
 
-        .services-section {
-            margin: 25px 0;
+        /* Цвет для списка правил */
+        .rules-list {
+            color: var(--text-muted);
         }
 
-        .categories-cmd {
-            color: var(--text-muted);
-            margin-bottom: 15px;
-            font-size: 0.95rem;
+        .services-section {
+            margin: 25px 0;
         }
 
         details.tui-collapse {
@@ -339,28 +348,61 @@
         <nav class="far-nav">
             <a href="index.html">Главная</a>
             <a href="services.html" class="active">Услуги</a>
-            <a href="index.html#prices">Стоимость</a>
-            <a href="index.html#blog">Блог</a>
-            <a href="index.html#contacts">Контакты</a>
+            <a href="prices.html">Стоимость</a>
+            <!-- <a href="#blog">Блог</a>-->
+            <!-- <a href="#contacts">Контакты</a>-->
         </nav>
         <button class="theme-toggle-raw" onclick="toggleTheme()" id="themeToggle" title="Переключить тему">☾</button>
     </div>
 
     <main class="services-section">
         <div class="services-hero">
-            <p style="margin-bottom: 8px;">
+            <p class="term-command">
                 <span class="prompt">$</span>cat /etc/services/rules.conf
             </p>
-            <div>
+            <div class="rules-list">
                 <p>- Диагностика и согласование стоимости ДО начала работ.</p>
                 <p>- Предупредим, если ремонт экономически нецелесообразен.</p>
                 <p>- Официальная гарантия на выполненные работы.</p>
             </div>
         </div>
 
-        <p class="categories-cmd">
-            <span class="prompt">$</span>tree /services/categories/
-        </p>
+        <div class="services-hero">
+            <p class="term-command">
+                <span class="prompt">$</span>tree /services/categories/
+            </p>
+        <div>
+			
+        <details class="tui-collapse">
+            <summary>
+                <div>
+                    <span class="prompt">#</span>ТЕЛЕ_АУДИО_ТЕХНИКА
+                </div>
+            </summary>
+            <div class="collapse-content">
+                <div class="category-desc">
+                    Телевизоры, приставки, усилители.
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт телевизоров</div>
+                        <div class="service-desc">Замена подсветки, ремонт блоков питания, системных плат (Main Board) и восстановление прошивки.</div>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт ТВ-приставок и ресиверов</div>
+                        <div class="service-desc">Восстановление питания, компонентный ремонт, замена разъемов и настройка ПО.</div>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-name">Ремонт усилителей и аудиосистем</div>
+                        <div class="service-desc">Диагностика и замена каскадов усиления, ремонт блоков питания, устранение фона и искажений звука.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
 
         <details class="tui-collapse">
             <summary>
