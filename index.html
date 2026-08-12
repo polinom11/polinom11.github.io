@@ -73,7 +73,7 @@
         }
 
         header {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-align: left;
         }
 
@@ -205,24 +205,95 @@
             padding-top: 15px;
         }
 
+        /* Кликабельная миниатюра без иконки */
         .photo-container {
             position: relative;
             width: 100%;
             height: 220px;
             background-color: var(--bg-nav);
-            border: 1px solid var(--text-muted);
+            border: 1px dashed var(--dot-color);
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 15px;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+        }
+
+        .photo-container:hover {
+            border: 1px solid var(--border-active);
         }
 
         .photo-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(40%) contrast(105%);
+            filter: grayscale(20%) contrast(105%);
+            transition: filter 0.2s ease, transform 0.2s ease;
+        }
+
+        .photo-container:hover img {
+            filter: grayscale(0%) contrast(100%);
+            transform: scale(1.02);
+        }
+
+        /* Модальное окно (Лайтбокс) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            border: 1px solid var(--border-active);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            object-fit: contain;
+        }
+
+        .modal-close {
+            background: var(--bg-nav);
+            color: var(--text);
+            border: 1px solid var(--dot-color);
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
+            border-color: var(--accent);
         }
 
         .photo-info-text {
@@ -337,9 +408,9 @@
         <nav class="far-nav">
             <a href="index.html" class="active">Главная</a>
             <a href="services.html">Услуги</a>
-            <a href="#prices">Стоимость</a>
-            <a href="#blog">Блог</a>
-            <a href="#contacts">Контакты</a>
+            <a href="prices.html">Стоимость</a>
+            <!-- <a href="#blog">Блог</a>-->
+            <!-- <a href="#contacts">Контакты</a>-->
         </nav>
         <button class="theme-toggle-raw" onclick="toggleTheme()" id="themeToggle" title="Переключить тему">☾</button>
     </div>
@@ -351,14 +422,23 @@
     </section>
 
     <div style="margin-bottom: 25px; color: var(--text-muted); font-size: 0.85rem;">
-        <div class="photo-container">
-            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Фото локации">
+        <!-- Миниатюра с вызовом модального окна -->
+        <div class="photo-container" onclick="openModal('images/fasad.jpg')">
+            <img src="images/fasad.jpg" alt="Фасад сервисного центра Гагаринский">
         </div>
         
         <div class="photo-info-text">
             <p><span class="prompt">></span>АДРЕС: г. Вологда, ул. Гагарина, д. 2А, корп. 1 (вход со стороны дороги)</p>
             <p style="margin-top: 4px;"><span class="prompt">></span>ВРЕМЯ: 10:00-18:00 (пн-пт), 10:00-14:00 (сб)</p>
             <p style="margin-top: 4px;"><span class="prompt">></span>ТЕЛ: <a href="tel:+78172585808">(8172) 58-58-08</a>, <a href="tel:+79215301010">8 (921) 530-10-10</a></p>
+        </div>
+    </div>
+
+    <!-- Модальное окно просмотрщика фото -->
+    <div class="modal-overlay" id="imageModal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">[X] CLOSE</button>
+            <img id="modalImage" src="" alt="Увеличенное фото фасада" onclick="closeModal()">
         </div>
     </div>
 
@@ -481,6 +561,27 @@
                 el.classList.toggle('status-offline', !isOpen);
             }
         }
+
+        /* Функции для управления модальным окном */
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgSrc;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
 
         syncThemeUI();
         checkWorkingHours();
