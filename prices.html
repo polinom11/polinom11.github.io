@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light-red">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стоимость — Сервисный центр "Гагаринский"</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+    (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light-red' || (!savedTheme && true)) {
+            document.documentElement.setAttribute('data-theme', 'light-red');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+    })();
+    </script>
+	
+    <style>
+        html {
+            scrollbar-gutter: stable;
+        }
+
+        :root {
+            --bg: #171717;          
+            --bg-nav: #262626;      
+            --text: #e5e5e5;        
+            --text-muted: #a3a3a3;  
+            --accent: #facc15;      
+            --selection: #333333;   
+            --dot-color: #52525b;
+            --border-active: #ffffff;
+        }
+
+        [data-theme="light-red"] {
+            --bg: #ffffff;          
+            --bg-nav: #e4e4e7;      
+            --text: #18181b;        
+            --text-muted: #52525b;  
+            --accent: #dc2626;      
+            --selection: #f4f4f5;   
+            --dot-color: #71717a;
+            --border-active: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 40px 20px;
+            max-width: 720px;
+            margin: 0 auto;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .prompt {
+            color: var(--accent);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .term-command {
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            color: #52525b; 
+        }
+
+        [data-theme="light-red"] .term-command {
+            color: #b5b5b5;
+        }
+
+        header {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .sys-info {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+            letter-spacing: 0.02em;
+        }
+
+        .brand-title {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .brand-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .nav-container {
+            width: 100%;
+            background-color: var(--bg-nav);
+            padding: 8px 12px;
+            margin: 20px 0 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav.far-nav {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        nav.far-nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            position: relative;
+            padding-left: 12px;
+            transition: color 0.15s ease;
+        }
+
+        nav.far-nav a::before {
+            content: ">";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+        }
+
+        nav.far-nav a:hover, nav.far-nav a.active {
+            color: var(--accent);
+        }
+
+        nav.far-nav a:hover::before, nav.far-nav a.active::before {
+            opacity: 1;
+        }
+
+        .theme-toggle-raw {
+            background: transparent;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0 4px;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.15s ease;
+            user-select: none;
+        }
+
+        .theme-toggle-raw.sun-mode {
+            font-size: 0.8rem;
+        }
+
+        .theme-toggle-raw:hover {
+            color: var(--accent);
+        }
+
+        .prices-section {
+            margin: 25px 0;
+        }
+
+        details.tui-collapse {
+            margin-bottom: 12px;
+            position: relative;
+            border: 1px dashed var(--dot-color);
+        }
+
+        details.tui-collapse:not([open]):hover {
+            border: 1px solid var(--border-active);
+        }
+
+        details.tui-collapse[open] {
+            border: 1px solid var(--border-active);
+        }
+
+        details.tui-collapse summary {
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+            padding: 9px 14px;
+            color: var(--text);
+            transition: background-color 0.15s ease;
+        }
+
+        details.tui-collapse summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.tui-collapse summary:hover {
+            background-color: var(--selection);
+        }
+
+        details.tui-collapse summary::after {
+            content: "[+] EXPANSE";
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        details.tui-collapse summary:hover::after {
+            color: var(--text);
+        }
+
+        details.tui-collapse[open] summary::after {
+            content: "[-] COLLAPSE";
+            color: var(--accent);
+        }
+
+        .collapse-content {
+            padding: 12px 14px 16px 14px;
+            background-image: linear-gradient(to right, var(--dot-color) 33%, rgba(255,255,255,0) 0%);
+            background-position: top;
+            background-size: 5px 1px;
+            background-repeat: repeat-x;
+        }
+
+        .text-block {
+            margin-bottom: 16px;
+        }
+
+        .text-block p {
+            margin-bottom: 12px;
+        }
+
+        .text-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 8px 6px;
+            transition: background-color 0.15s ease;
+        }
+
+        .service-row:hover {
+            background-color: var(--selection);
+        }
+
+        .service-details {
+            flex: 1;
+            width: 100%;
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .service-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        /* Настоящие шрифтовые точки JetBrains Mono по центру строки */
+        .dots {
+            flex: 1;
+            overflow: hidden;
+            margin: 0 8px;
+            color: var(--text);
+            font-size: 0.9rem;
+            user-select: none;
+            white-space: nowrap;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+        }
+
+        .dots::after {
+            content: "....................................................................................................";
+            transform: translateY(-0.28em);
+        }
+
+        .service-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .service-price {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        .hr-dashed {
+            margin: 20px 0;
+            height: 1px;
+            background-image: linear-gradient(to right, var(--dot-color) 33%, rgba(255,255,255,0) 0%);
+            background-size: 5px 1px;
+            background-repeat: repeat-x;
+        }
+
+        footer {
+            margin-top: 8px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .status-online {
+            color: #22c55e;
+            font-weight: 700;
+        }
+
+        .status-offline {
+            color: #ef4444;
+            font-weight: 700;
+        }
+
+        @media (max-width: 600px) {
+            .nav-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .service-name {
+                white-space: normal;
+            }
+            details.tui-collapse summary::after {
+                content: "[+]";
+            }
+            details.tui-collapse[open] summary::after {
+                content: "[-]";
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="sys-info">[ Просто качественный ремонт ]</div>
+        <div class="brand-title"><a href="index.html">Сервисный центр "Гагаринский"</a></div>
+    </header>
+
+    <div class="nav-container">
+        <nav class="far-nav">
+            <a href="index.html">Главная</a>
+            <a href="services.html">Услуги</a>
+            <a href="prices.html" class="active">Стоимость</a>
+            <!-- <a href="#blog">Блог</a>-->
+            <!-- <a href="#contacts">Контакты</a>-->
+        </nav>
+        <button class="theme-toggle-raw" onclick="toggleTheme()" id="themeToggle" title="Переключить тему">☾</button>
+    </div>
+
+    <main class="prices-section">
+        <p class="term-command">
+            <span class="prompt">$</span>cat /docs/pricing_info.txt
+        </p>
+
+        <details class="tui-collapse">
+            <summary>
+                <div>
+                    <span class="prompt">i.</span>Почему нет общего прайса?
+                </div>
+            </summary>
+            <div class="collapse-content">
+                <div class="text-block">
+                    <p>Клиенты иногда спрашивают: «Почему нельзя сразу назвать точную стоимость ремонта?». Хотим объяснить, из чего складывается и от чего зависит финальный чек.</p>
+                </div>
+
+                <div class="text-block">
+                    <p><strong style="color: var(--text);">1. Львиная доля стоимости — это запчасти.</strong></p>
+                    <p>Цена ремонта напрямую зависит от комплектующих, стоимость которых зачастую превышает цену самой работы. Например, электронный модуль управления (плата) стиральной машины может стоить в 3–5 раз дороже, чем услуги по его монтажу. Однако в большинстве случаев нам удается отремонтировать старый модуль, благодаря чему ремонт обходится значительно дешевле. Более того, цена на одну и ту же деталь для разных моделей техники существенно отличается, а ведь есть еще и разные по цене аналоги. Вот и получается, что прайс с учетом деталей составить невозможно, а цены только на работу не дают представления о реальной стоимости ремонта.</p>
+                </div>
+
+                <div class="text-block">
+                    <p><strong style="color: var(--text);">2. Сложность конструкции техники.</strong></p>
+                    <p>Чтобы заменить одну и ту же деталь (например, подшипник) в разных моделях инструментов или техники, требуется разное количество времени и усилий. В одном приборе доступ к узлу занимает 10 минут, а в другом — мастеру приходится полностью разбирать корпус, демонтировать смежные системы и тратить на это несколько часов кропотливой работы.</p>
+                </div>
+
+                <div class="text-block">
+                    <p><strong style="color: var(--text);">3. Сложность самого дефекта.</strong></p>
+                    <p>Иногда поломка очевидна, а иногда одна неисправность тянет за собой другую. Простой пример: инструмент искрит. Это может быть как обычный износ щеток (копеечный ремонт), так и серьезное повреждение якоря двигателя (где требуется сложная замена или перемотка).</p>
+                </div>
+
+                <div class="text-block" style="margin-top: 24px;">
+                    <p><strong style="color: var(--text);">Как мы работаем, чтобы вам было спокойно?</strong> Мы не берем цены «с потолка» и не ставим вас перед фактом. Мастер проводит диагностику, находит причину, подбирает нужные запчасти и называет вам окончательную сумму до начала ремонта. Только после вашего согласия мастер приступает к работе!</p>
+                </div>
+            </div>
+        </details>
+
+        <!-- Глава ДИАГНОСТИКА -->
+        <details class="tui-collapse">
+            <summary>
+                <div>
+                    <span class="prompt">#</span>ДИАГНОСТИКА
+                </div>
+            </summary>
+            <div class="collapse-content">
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-header">
+                            <span class="service-name">Первичный осмотр</span>
+                            <span class="dots"></span>
+                            <span class="service-price">100р.</span>
+                        </div>
+                        <div class="service-desc">Если для выявления неисправности достаточно простого осмотра.</div>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-header">
+                            <span class="service-name">Диагностика</span>
+                            <span class="dots"></span>
+                            <span class="service-price">200р.</span>
+                        </div>
+                        <div class="service-desc">Вся техника, требующая разборки, за исключением перечня из сложной диагностики.</div>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-details">
+                        <div class="service-header">
+                            <span class="service-name">Сложная диагностика</span>
+                            <span class="dots"></span>
+                            <span class="service-price">300 - 500р.</span>
+                        </div>
+                        <div class="service-desc">Телевизоры, стиральные машины, сварочные аппараты, варочные поверхности, музыкальные центры, нестандартные случаи.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+    </main>
+
+    <div class="hr-dashed"></div>
+
+    <footer id="contacts">
+        <div class="footer-status">
+            <span class="prompt">$</span>status: <span id="statusIndicator" class="status-online">ONLINE</span> | <span id="year">2026</span> &copy; Сервисный центр "Гагаринский"
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function syncThemeUI() {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light-red';
+            const btn = document.getElementById('themeToggle');
+            btn.textContent = isLight ? '☾' : '☀';
+            btn.classList.toggle('sun-mode', !isLight);
+        }
+
+        function toggleTheme() {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light-red';
+            const newTheme = isLight ? 'dark' : 'light-red';
+            
+            if (newTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light-red');
+            }
+            localStorage.setItem('theme', newTheme);
+            syncThemeUI();
+        }
+
+        function checkWorkingHours() {
+            const now = new Date();
+            const day = now.getDay(); 
+            const time = now.getHours() * 100 + now.getMinutes();
+            
+            const holidays = ["01-01","01-02","01-03","01-04","01-05","01-06","01-07","01-08","02-23","03-08","05-01","05-09","06-12","11-04"];
+            const today = String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+
+            const isOpen = !holidays.includes(today) && (
+                (day >= 1 && day <= 5 && time >= 1000 && time < 1800) ||
+                (day === 6 && time >= 1000 && time < 1400)
+            );
+
+            const el = document.getElementById('statusIndicator');
+            if (el) {
+                el.textContent = isOpen ? 'ONLINE' : 'OFFLINE';
+                el.classList.toggle('status-online', isOpen);
+                el.classList.toggle('status-offline', !isOpen);
+            }
+        }
+
+        syncThemeUI();
+        checkWorkingHours();
+    </script>
+</body>
+</html>
