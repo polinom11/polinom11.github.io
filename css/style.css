@@ -1,0 +1,479 @@
+html {
+    scrollbar-gutter: stable;
+}
+
+:root {
+    --bg: #171717;          
+    --bg-nav: #262626;      
+    --text: #e5e5e5;        
+    --text-muted: #a3a3a3;  
+    --accent: #facc15;      
+    --selection: #333333;   
+    --dot-color: #52525b;
+    --border-active: #ffffff;
+}
+
+[data-theme="light-red"] {
+    --bg: #ffffff;          
+    --bg-nav: #e4e4e7;      
+    --text: #18181b;        
+    --text-muted: #52525b;  
+    --accent: #dc2626;      
+    --selection: #f4f4f5;   
+    --dot-color: #71717a;
+    --border-active: #000000;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 40px 20px;
+    max-width: 720px;
+    margin: 0 auto;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Стиль обводки при навигации клавишей Tab */
+a:focus-visible,
+button:focus-visible,
+details summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.prompt {
+    color: var(--accent);
+    font-weight: 700;
+    margin-right: 8px;
+}
+
+.term-command {
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+    color: #52525b; 
+}
+
+[data-theme="light-red"] .term-command {
+    color: #b5b5b5;
+}
+
+header {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.sys-info {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+}
+
+.brand-title {
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+}
+
+.brand-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.nav-container {
+    width: 100%;
+    background-color: var(--bg-nav);
+    padding: 8px 12px;
+    margin: 20px 0 25px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav.far-nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+nav.far-nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    position: relative;
+    padding-left: 12px;
+    transition: color 0.15s ease;
+}
+
+nav.far-nav a::before {
+    content: ">";
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+nav.far-nav a:hover, nav.far-nav a.active {
+    color: var(--accent);
+}
+
+nav.far-nav a:hover::before, nav.far-nav a.active::before {
+    opacity: 1;
+}
+
+.theme-toggle-raw {
+    background: transparent;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease;
+    user-select: none;
+}
+
+.theme-toggle-raw.sun-mode {
+    font-size: 0.8rem;
+}
+
+.theme-toggle-raw:hover {
+    color: var(--accent);
+}
+
+.hero-text {
+    margin: 25px 0;
+}
+
+.services-hero {
+    color: var(--text);
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.rules-list {
+    color: var(--text-muted);
+}
+
+.services-section, .prices-section {
+    margin: 25px 0;
+}
+
+/* Аккордеоны / Collapse */
+details.tui-collapse {
+    margin-bottom: 12px;
+    position: relative;
+    border: 1px dashed var(--dot-color);
+}
+
+details.tui-collapse:not([open]):hover {
+    border: 1px solid var(--border-active);
+}
+
+details.tui-collapse[open] {
+    border: 1px solid var(--border-active);
+}
+
+details.tui-collapse summary {
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    padding: 9px 14px;
+    color: var(--text);
+    transition: background-color 0.15s ease;
+}
+
+details.tui-collapse summary::-webkit-details-marker {
+    display: none;
+}
+
+details.tui-collapse summary:hover {
+    background-color: var(--selection);
+}
+
+details.tui-collapse summary::after {
+    content: "[+] EXPAND";
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+}
+
+details.tui-collapse summary:hover::after {
+    color: var(--text);
+}
+
+details.tui-collapse[open] summary::after {
+    content: "[-] COLLAPSE";
+    color: var(--accent);
+}
+
+.collapse-content {
+    padding: 12px 14px 16px 14px;
+    background-image: linear-gradient(to right, var(--dot-color) 33%, rgba(255,255,255,0) 0%);
+    background-position: top;
+    background-size: 5px 1px;
+    background-repeat: repeat-x;
+}
+
+.text-block {
+    margin-bottom: 16px;
+}
+
+.text-block p {
+    margin-bottom: 12px;
+}
+
+.text-block p:last-child {
+    margin-bottom: 0;
+}
+
+.category-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+/* Строки услуг и цен */
+.service-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 8px 6px;
+    transition: background-color 0.15s ease;
+}
+
+.service-row:hover {
+    background-color: var(--selection);
+}
+
+.service-details {
+    flex: 1;
+    width: 100%;
+}
+
+.service-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.service-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.dots {
+    flex: 1;
+    border-bottom: 2px dotted var(--dot-color);
+    margin: 0 8px 4px 8px;
+}
+
+.service-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.service-price {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+/* Кликабельная миниатюра */
+button.photo-container {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background-color: var(--bg-nav);
+    border: 1px dashed var(--dot-color);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    padding: 0;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+button.photo-container:hover {
+    border: 1px solid var(--border-active);
+}
+
+button.photo-container:focus-visible {
+    border-color: var(--accent);
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+button.photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(105%);
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+button.photo-container:hover img, 
+button.photo-container:focus-visible img {
+    filter: grayscale(0%) contrast(100%);
+    transform: scale(1.02);
+}
+
+/* Модальное окно */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    border: 1px solid var(--border-active);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    object-fit: contain;
+}
+
+.modal-close {
+    background: var(--bg-nav);
+    color: var(--text);
+    border: 1px solid var(--dot-color);
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.modal-close:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.photo-info-text {
+    margin-top: 15px;
+}
+
+.photo-info-text a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.photo-info-text a:hover {
+    color: var(--accent);
+}
+
+.hr-dashed {
+    margin: 20px 0;
+    height: 1px;
+    background-image: linear-gradient(to right, var(--dot-color) 33%, rgba(255,255,255,0) 0%);
+    background-size: 5px 1px;
+    background-repeat: repeat-x;
+}
+
+footer {
+    margin-top: 8px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-align: left;
+}
+
+.footer-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.status-online {
+    color: #22c55e;
+    font-weight: 700;
+}
+
+.status-offline {
+    color: #ef4444;
+    font-weight: 700;
+}
+
+@media (max-width: 600px) {
+    .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .service-name {
+        white-space: normal;
+    }
+    .service-row {
+        flex-direction: column;
+        gap: 2px;
+    }
+    details.tui-collapse summary::after {
+        content: "[+]";
+    }
+    details.tui-collapse[open] summary::after {
+        content: "[-]";
+    }
+}
