@@ -3,10 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Сервисный центр 'Гагаринский' в Вологде. Ремонт бытовой техники, электроинструмента, ТВ и аудио в Вологде на ул. Гагарина, 2А., корп.1">
+	<link rel="canonical" href="https://gagarin35.ru/">
     <title>Сервисный центр "Гагаринский"</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+	
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://gagarin35.ru/">
+	<meta property="og:title" content="Сервисный центр 'Гагаринский' | Ремонт техники в Вологде">
+	<meta property="og:description" content="Ремонт бытовой техники, электроинструмента, ТВ и аудио в Вологде.">
+	<meta property="og:image" content="https://gagarin35.ru/images/og-preview.jpg">
     
     <script>
     (function() {
@@ -56,7 +64,7 @@
 
         body {
             background-color: var(--bg);
-            color: var(--text);
+            color: var(--text-muted);
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.95rem;
             line-height: 1.5;
@@ -64,6 +72,14 @@
             max-width: 720px;
             margin: 0 auto;
             transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        /* Стиль обводки при навигации клавишей Tab */
+        a:focus-visible,
+        button:focus-visible,
+        details summary:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
         }
 
         .prompt {
@@ -177,36 +193,8 @@
             margin: 25px 0;
         }
 
-        details.tui-collapse {
-            margin-bottom: 15px;
-        }
-
-        details.tui-collapse summary {
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            align-items: center;
-            user-select: none;
-            padding: 4px 0;
-            transition: color 0.15s ease;
-        }
-
-        details.tui-collapse summary::-webkit-details-marker {
-            display: none;
-        }
-
-        details.tui-collapse summary:hover {
-            color: var(--accent);
-        }
-
-        .collapse-content {
-            padding-top: 15px;
-        }
-
-        /* Кликабельная миниатюра без иконки */
-        .photo-container {
+        /* Кликабельная миниатюра в виде кнопки */
+        button.photo-container {
             position: relative;
             width: 100%;
             height: 220px;
@@ -217,15 +205,22 @@
             align-items: center;
             justify-content: center;
             margin-top: 15px;
+            padding: 0;
             cursor: pointer;
             transition: border-color 0.2s ease;
         }
 
-        .photo-container:hover {
+        button.photo-container:hover {
             border: 1px solid var(--border-active);
         }
 
-        .photo-container img {
+        button.photo-container:focus-visible {
+            border-color: var(--accent);
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        button.photo-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -233,7 +228,8 @@
             transition: filter 0.2s ease, transform 0.2s ease;
         }
 
-        .photo-container:hover img {
+        button.photo-container:hover img, 
+        button.photo-container:focus-visible img {
             filter: grayscale(0%) contrast(100%);
             transform: scale(1.02);
         }
@@ -309,58 +305,6 @@
             color: var(--accent);
         }
 
-        .service-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 15px;
-            padding: 8px 6px;
-            transition: background-color 0.15s ease;
-        }
-
-        .service-row:hover {
-            background-color: var(--selection);
-        }
-
-        .service-details {
-            flex: 1;
-        }
-
-        .service-name {
-            font-weight: 700;
-        }
-
-        .service-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .service-price {
-            font-weight: 700;
-            color: var(--accent);
-            white-space: nowrap;
-        }
-
-        .blog-entry {
-            padding: 8px 0;
-            border-bottom: 1px dashed var(--text-muted);
-        }
-
-        .blog-entry:last-child {
-            border-bottom: none;
-        }
-
-        .blog-title {
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        .blog-meta {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
         footer {
             margin-top: 8px;
             color: var(--text-muted);
@@ -390,10 +334,6 @@
                 flex-direction: row;
                 justify-content: space-between;
             }
-            .service-row {
-                flex-direction: column;
-                gap: 2px;
-            }
         }
     </style>
 </head>
@@ -401,16 +341,14 @@
 
     <header>
         <div class="sys-info">[ Просто качественный ремонт ]</div>
-        <div class="brand-title"><a href="index.html">Сервисный центр "Гагаринский"</a></div>
+        <div class="brand-title"><a href="/">Сервисный центр "Гагаринский"</a></div>
     </header>
 
     <div class="nav-container">
         <nav class="far-nav">
-            <a href="index.html" class="active">Главная</a>
+            <a href="/" class="active">Главная</a>
             <a href="services.html">Услуги</a>
             <a href="prices.html">Стоимость</a>
-            <!-- <a href="#blog">Блог</a>-->
-            <!-- <a href="#contacts">Контакты</a>-->
         </nav>
         <button class="theme-toggle-raw" onclick="toggleTheme()" id="themeToggle" title="Переключить тему">☾</button>
     </div>
@@ -422,10 +360,10 @@
     </section>
 
     <div style="margin-bottom: 25px; color: var(--text-muted); font-size: 0.85rem;">
-        <!-- Миниатюра с вызовом модального окна -->
-        <div class="photo-container" onclick="openModal('images/fasad.jpg')">
+        <!-- Доступная миниатюра на базе семантической кнопки -->
+        <button type="button" class="photo-container" onclick="openModal('images/fasad.jpg')" aria-label="Увеличить фото фасада">
             <img src="images/fasad.jpg" alt="Фасад сервисного центра Гагаринский">
-        </div>
+        </button>
         
         <div class="photo-info-text">
             <p><span class="prompt">></span>АДРЕС: г. Вологда, ул. Гагарина, д. 2А, корп. 1 (вход со стороны дороги)</p>
@@ -441,74 +379,6 @@
             <img id="modalImage" src="" alt="Увеличенное фото фасада" onclick="closeModal()">
         </div>
     </div>
-
-    <details class="tui-collapse" id="services" style="display: none;">
-        <summary><span class="prompt">#</span>КАТАЛОГ_УСЛУГ</summary>
-        <div class="collapse-content">
-            <div class="service-row">
-                <div class="service-details">
-                    <div class="service-name">Обслуживание электроинструмента</div>
-                    <div class="service-desc">Замена щеток, подшипников, редукторов, роторов. Перфораторы, УШМ, дрели.</div>
-                </div>
-            </div>
-            <div class="service-row">
-                <div class="service-details">
-                    <div class="service-name">Ремонт мелкой бытовой техники</div>
-                    <div class="service-desc">Кофемашины, пылесосы, микроволновки, мясорубки и блендеры.</div>
-                </div>
-            </div>
-            <div class="service-row">
-                <div class="service-details">
-                    <div class="service-name">Компонентный ремонт электроники</div>
-                    <div class="service-desc">Восстановление плат управления, замена силовых ключей и модулей питания.</div>
-                </div>
-            </div>
-        </div>
-    </details>
-
-    <details class="tui-collapse" id="prices" style="display: none;">
-        <summary><span class="prompt">#</span>СТОИМОСТЬ</summary>
-        <div class="collapse-content">
-            <div class="service-row">
-                <div class="service-details">
-                    <div class="service-name">Диагностика (без последующего ремонта)</div>
-                </div>
-                <div class="service-price">500_RUB</div>
-            </div>
-            <div class="service-row">
-                <div class="service-details">
-                    <div class="service-name">Ремонт электроинструмента</div>
-                </div>
-                <div class="service-price">от 800_RUB</div>
-            </div>
-            <div class="service-row">
-                <div class="service-details">
-                    <div class="service-name">Ремонт мелкой бытовой техники</div>
-                </div>
-                <div class="service-price">от 1200_RUB</div>
-            </div>
-            <div class="service-row">
-                <div class="service-details">
-                    <div class="service-name">Компонентный ремонт плат</div>
-                </div>
-                <div class="service-price">от 2000_RUB</div>
-            </div>
-        </div>
-    </details>
-
-    <details class="tui-collapse" id="blog" style="display: none;">
-        <summary><span class="prompt">#</span>ЗАМЕТКИ_ИНЖЕНЕРА</summary>
-        <div class="collapse-content">
-            <div class="blog-entry">
-                <div class="blog-title">> Почему искрит щетка у перфоратора и когда пора в сервис</div>
-                <div class="blog-meta">[TAGS: электроинструмент, профилактика] -- 2026-01-15</div>
-            </div>
-            <div class="blog-entry">
-                <div class="blog-title">> Чистка гидросистемы кофемашины: как избежать дорогого ремонта</div>
-                <div class="blog-meta">[TAGS: бытовая_техника, совет] -- 2026-02-03</div>
-            </div>
-        </div>
-    </details>
 
     <div class="hr-dashed"></div>
 
