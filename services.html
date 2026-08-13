@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="light-red">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Услуги по ремонту крупной и мелкой бытовой техники, теле- и аудиоаппаратуры, электроинструмента и насосного оборудования в Вологде в сервисном центре 'Гагаринский'.">
+	<link rel="canonical" href="https://gagarin35.ru/services.html">
     <title>Услуги — Сервисный центр "Гагаринский"</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+	
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://gagarin35.ru/">
+	<meta property="og:title" content="Сервисный центр 'Гагаринский' | Ремонт техники в Вологде">
+	<meta property="og:description" content="Ремонт бытовой техники, электроинструмента, ТВ и аудио в Вологде.">
+	<meta property="og:image" content="https://gagarin35.ru/images/og-preview.jpg">
     
     <script>
         (function() {
@@ -56,7 +64,7 @@
 
         body {
             background-color: var(--bg);
-            color: var(--text);
+            color: var(--text-muted);
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.95rem;
             line-height: 1.5;
@@ -64,6 +72,14 @@
             max-width: 720px;
             margin: 0 auto;
             transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        /* Стиль обводки при навигации клавишей Tab */
+        a:focus-visible,
+        button:focus-visible,
+        details summary:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
         }
 
         .prompt {
@@ -228,7 +244,7 @@
         }
 
         details.tui-collapse summary::after {
-            content: "[+] EXPANSE";
+            content: "[+] EXPAND";
             font-size: 0.8rem;
             color: var(--text-muted);
             font-weight: 400;
@@ -279,6 +295,7 @@
         .service-name {
             font-weight: 700;
             font-size: 0.9rem;
+			color: var(--text);
         }
 
         .service-desc {
@@ -341,16 +358,14 @@
 
     <header>
         <div class="sys-info">[ Просто качественный ремонт ]</div>
-        <div class="brand-title"><a href="index.html">Сервисный центр "Гагаринский"</a></div>
+        <div class="brand-title"><a href="/">Сервисный центр "Гагаринский"</a></div>
     </header>
 
     <div class="nav-container">
         <nav class="far-nav">
-            <a href="index.html">Главная</a>
+            <a href="/">Главная</a>
             <a href="services.html" class="active">Услуги</a>
             <a href="prices.html">Стоимость</a>
-            <!-- <a href="#blog">Блог</a>-->
-            <!-- <a href="#contacts">Контакты</a>-->
         </nav>
         <button class="theme-toggle-raw" onclick="toggleTheme()" id="themeToggle" title="Переключить тему">☾</button>
     </div>
@@ -371,7 +386,7 @@
             <p class="term-command">
                 <span class="prompt">$</span>tree /services/categories/
             </p>
-        <div>
+        </div>
 			
         <details class="tui-collapse">
             <summary>
