@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: ВАШ_GITHUB_USERNAME/ВАШ_РЕПОЗИТОРИЙ # Название вашего репозитория
+  repo: Polinom11/gagarin35 # Название вашего репозитория
   branch: main # Или master
   base_url: https://gagarin-decap-oauth.polinom11.workers.dev # URL вашего Worker
   auth_endpoint: /auth
