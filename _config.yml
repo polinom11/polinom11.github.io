@@ -1,0 +1,22 @@
+# Основные настройки сайта
+title: "Gagarin35.ru"
+description: "Блог и новости проекта Gagarin35"
+url: "https://Gagarin35.ru" # Намените на ваш итоговый домен
+
+# Настройки генерации страниц и Markdown
+markdown: kramdown
+highlighter: rouge
+permalink: /blog/:title/
+
+# Исключения (файлы и папки, которые Jekyll НЕ должен обрабатывать как страницы)
+exclude:
+  - README.md
+  - cloudcannon.config.json
+  - cloudcannon.config.cjs
+  - cloudcannon.config.yml
+
+# Включение генератора постов из папки _posts
+collections:
+  posts:
+    output: true
+    permalink: /blog/:title/
