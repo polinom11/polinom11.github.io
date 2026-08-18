@@ -2,10 +2,9 @@ backend:
   name: github
   repo: polinom11/polinom11.github.io
   branch: main
-  site_domain: gagarin35.ru
   base_url: https://sveltia-cms-auth.vercel.app
-  auth_endpoint: /auth
-  app_id: Ov23lioIbqygUwbNCX0P # Скопируйте Client ID из 3-й вкладки браузера
+  auth_endpoint: auth
+  client_id: Ov23lioIbqygUwbNCX0P
 
 media_folder: "images"
 public_folder: "/images"
