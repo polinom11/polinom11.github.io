@@ -1,7 +1,9 @@
 backend:
   name: github
-  repo: polinom11/polinom11.github.io # Укажите ваш GitHub-аккаунт и имя репозитория
-  branch: main # Основная ветка (main или master)
+  repo: polinom11/polinom11.github.io
+  branch: main
+  base_url: https://sveltia-cms-auth.vercel.app
+  auth_endpoint: /auth
 
 # Папка для загружаемых медиафайлов
 media_folder: "images"
