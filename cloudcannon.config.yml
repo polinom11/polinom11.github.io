@@ -1,11 +1,10 @@
-paths:
-  static: ''
-  uploads: images
-timezone: Europe/Moscow
-markdown:
-  engine: commonmark
-  options: {}
-collections_config:
-  pages:
-    path: ''
-    icon: wysiwyg
+module.exports = {
+  collections_config: {
+    posts: {
+      path: 'posts',
+      output: true,
+      name: 'Блог',
+      icon: 'wysiwyg'
+    }
+  }
+};
