@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light-red">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ page.description | default: page.excerpt | strip_html | truncate: 160 }}">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    <title>{{ page.title }} — Сервисный центр "Гагаринский"</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:title" content="{{ page.title }} | Сервисный центр 'Гагаринский'">
+    <meta property="og:description" content="{{ page.description | default: page.excerpt | strip_html | truncate: 160 }}">
+    <meta property="og:image" content="{{ page.image | default: '/images/og-preview.jpg' | absolute_url }}">
+	
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111581561', 'ym');
+
+        ym(111581561, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/111581561" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+   
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+    (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light-red' || (!savedTheme && true)) {
+            document.documentElement.setAttribute('data-theme', 'light-red');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+    })();
+    </script>
+    <script src="/js/main.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <div class="sys-info">[ Просто качественный ремонт ]</div>
+        <div class="brand-title"><a href="/">Сервисный центр "Гагаринский"</a></div>
+    </header>
+
+    <div class="nav-container">
+        <nav class="far-nav">
+            <a href="/">Главная</a>
+            <a href="/services.html">Услуги</a>
+            <a href="/prices.html">Стоимость</a>
+            <a href="/blog.html" class="active">Блог</a>
+        </nav>
+        <button class="theme-toggle-raw" onclick="toggleTheme()" id="themeToggle" title="Переключить тему">☾</button>
+    </div>
+
+    <main class="post-section">
+        <article>
+            <p class="term-command">
+                <span class="prompt">$</span>cat /blog/posts/{{ page.path | split: '/' | last }}
+            </p>
+
+            <header class="post-header" style="margin-bottom: 20px;">
+                <h1 style="color: var(--text); font-size: 1.3rem; margin-bottom: 6px;">{{ page.title }}</h1>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">
+                    <span class="prompt">></span>ДАТА: {{ page.date | date: "%d.%m.%Y" }}
+                    {% if page.author %}
+                        | <span class="prompt">></span>АВТОР: {{ page.author }}
+                    {% endif %}
+                </div>
+            </header>
+
+            <div class="hr-dashed"></div>
+
+            <div class="text-block" style="color: var(--text); line-height: 1.6; margin: 20px 0;">
+                <!-- Контент статьи Jekyll (из .md файла) -->
+                {{ content }}
+            </div>
+
+            <div class="hr-dashed"></div>
+
+            <div style="margin-top: 20px; font-size: 0.85rem;">
+                <a href="/blog.html" style="color: var(--text); text-decoration: none; font-weight: 700;">
+                    <span class="prompt"><</span> [ ВЕРНУТЬСЯ К СПИСКУ СТАТЕЙ ]
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <div class="hr-dashed"></div>
+
+    <footer id="contacts">
+        <div class="footer-status">
+            <span class="prompt">$</span>status: <span id="statusIndicator" class="status-online">ONLINE</span> | <span id="year">2026</span> &copy; Сервисный центр "Гагаринский"
+        </div>
+    </footer>
+
+</body>
+</html>
