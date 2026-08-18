@@ -485,19 +485,18 @@ footer {
     flex-wrap: wrap;
 }
 
-.status-online {
+/* Вывод статуса через Data-атрибут без задержек */
+#statusIndicator::before {
+    content: attr(data-status);
+    font-weight: 700;
+}
+
+#statusIndicator[data-status="ONLINE"] {
     color: #22c55e;
-    font-weight: 700;
 }
 
-.status-offline {
+#statusIndicator[data-status="OFFLINE"] {
     color: #ef4444;
-    font-weight: 700;
-}
-
-.status-loading {
-    visibility: hidden;
-    font-weight: 700;
 }
 
 @media (max-width: 600px) {
