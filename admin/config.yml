@@ -1,16 +1,17 @@
 backend:
   name: github
-  repo: polinom11/polinom11.github.io # Название вашего репозитория
-  branch: main # Или master
-  base_url: https://gagarin-decap-oauth.polinom11.workers.dev # URL вашего Worker
+  repo: polinom11/polinom11.github.io # Укажите ваш GitHub-аккаунт и имя репозитория
+  branch: main # Основная ветка (main или master)
+  base_url: https://sveltia-cms-auth.vercel.app
   auth_endpoint: /auth
 
-media_folder: "images/blog"
-public_folder: "/images/blog"
+# Папка для загружаемых медиафайлов
+media_folder: "images"
+public_folder: "/images"
 
 collections:
   - name: "blog"
-    label: "Записи блога"
+    label: "Статьи и Блог"
     folder: "posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
@@ -18,4 +19,5 @@ collections:
       - { label: "Заголовок", name: "title", widget: "string" }
       - { label: "Дата", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
       - { label: "Анонс", name: "description", widget: "text" }
+      - { label: "Главное изображение", name: "image", widget: "image", required: false }
       - { label: "Текст статьи", name: "body", widget: "markdown" }
