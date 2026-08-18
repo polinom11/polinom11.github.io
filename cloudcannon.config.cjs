@@ -1,0 +1,18 @@
+module.exports = {
+  collections_config: {
+    pages: {
+      path: '',
+      filter: {
+        base: 'strict',
+        glob: ['*.html']
+      },
+      name: 'Страницы'
+    },
+    posts: {
+      path: 'posts',
+      output: true,
+      name: 'Блог',
+      icon: 'wysiwyg'
+    }
+  }
+};
