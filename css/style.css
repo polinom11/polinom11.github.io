@@ -177,7 +177,7 @@ nav.far-nav a:hover::before, nav.far-nav a.active::before {
     color: var(--text-muted);
 }
 
-.services-section, .prices-section {
+.services-section, .prices-section, .blog-section {
     margin: 25px 0;
 }
 
@@ -297,7 +297,7 @@ details.tui-collapse[open] summary::after {
 
 .dots {
     flex: 1;
-    margin: 1px 8px 0; /* Верхний отступ (4px) опускает линию вниз */
+    margin: 2px 8px 0;
     border-bottom: 2px dotted var(--text);
     align-self: center;
 }
@@ -313,6 +313,42 @@ details.tui-collapse[open] summary::after {
     font-size: 0.9rem;
     color: var(--text);
     white-space: nowrap;
+}
+
+/* Кликабельные карточки статей блога */
+.blog-card {
+    position: relative;
+    cursor: pointer;
+}
+
+.blog-card .blog-link {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.blog-card .blog-link::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.blog-card:hover .blog-link {
+    color: var(--accent);
+}
+
+.blog-date {
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.empty-posts {
+    color: var(--text-muted);
+    padding: 12px 0;
 }
 
 /* Кликабельная миниатюра */
