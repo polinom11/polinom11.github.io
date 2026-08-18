@@ -4,6 +4,8 @@ backend:
   branch: main
   base_url: https://sveltia-cms-auth.vercel.app
   auth_endpoint: /auth
+  # ВАЖНО: Укажите Client ID из вашей вкладки "OAuth application settings"
+  app_id: Ov23lioIbqygUwbNCX0P
 
 # Папка для загружаемых медиафайлов
 media_folder: "images"
