@@ -2,9 +2,6 @@ backend:
   name: github
   repo: polinom11/polinom11.github.io
   branch: main
-  base_url: https://sveltia-cms-auth.vercel.app
-  auth_endpoint: auth
-  client_id: Ov23lioIbqygUwbNCX0P
 
 media_folder: "images"
 public_folder: "/images"
