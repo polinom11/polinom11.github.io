@@ -2,9 +2,8 @@ backend:
   name: github
   repo: polinom11/polinom11.github.io
   branch: main
-  base_url: https://sveltia-cms-auth.vercel.app
-  auth_endpoint: auth
-  app_id: Ov23lioIbqygUwbNCX0P
+  base_url: https://decapbridge.com
+  auth_endpoint: /auth
 
 media_folder: "images"
 public_folder: "/images"
