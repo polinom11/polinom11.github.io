@@ -3,19 +3,18 @@ backend:
   repo: polinom11/polinom11.github.io
   branch: main
 
-# Папка для загружаемых медиафайлов
 media_folder: "images"
 public_folder: "/images"
 
 collections:
   - name: "blog"
-    label: "Статьи и Блог"
+    label: "Blog"
     folder: "posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Заголовок", name: "title", widget: "string" }
-      - { label: "Дата", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
-      - { label: "Анонс", name: "description", widget: "text" }
-      - { label: "Главное изображение", name: "image", widget: "image", required: false }
-      - { label: "Текст статьи", name: "body", widget: "markdown" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Cover Image", name: "image", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
