@@ -495,6 +495,11 @@ footer {
     font-weight: 700;
 }
 
+.status-loading {
+    visibility: hidden;
+    font-weight: 700;
+}
+
 @media (max-width: 600px) {
     .nav-container {
         flex-direction: row;
