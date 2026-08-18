@@ -297,8 +297,9 @@ details.tui-collapse[open] summary::after {
 
 .dots {
     flex: 1;
-    border-bottom: 2px dotted var(--dot-color);
-    margin: 0 8px 4px 8px;
+    margin: 1px 8px 0; /* Верхний отступ (4px) опускает линию вниз */
+    border-bottom: 2px dotted var(--text);
+    align-self: center;
 }
 
 .service-desc {
