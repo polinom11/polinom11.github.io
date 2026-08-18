@@ -1,0 +1,113 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="ru" data-theme="light-red">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Блог и полезные статьи сервисного центра 'Гагаринский' в Вологде. Советы по эксплуатации и ремонту техники.">
+    <link rel="canonical" href="https://gagarin35.ru/blog.html">
+    <title>Блог — Сервисный центр "Гагаринский"</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gagarin35.ru/blog.html">
+    <meta property="og:title" content="Блог | Сервисный центр 'Гагаринский'">
+    <meta property="og:description" content="Статьи, кейсы и полезная информация о ремонте техники от мастеров сервисного центра 'Гагаринский'.">
+    <meta property="og:image" content="https://gagarin35.ru/images/og-preview.jpg">
+	
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111581561', 'ym');
+
+        ym(111581561, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/111581561" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+   
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+    (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light-red' || (!savedTheme && true)) {
+            document.documentElement.setAttribute('data-theme', 'light-red');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+    })();
+    </script>
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <div class="sys-info">[ Просто качественный ремонт ]</div>
+        <div class="brand-title"><a href="/">Сервисный центр "Гагаринский"</a></div>
+    </header>
+
+    <div class="nav-container">
+        <nav class="far-nav">
+            <a href="/">Главная</a>
+            <a href="services.html">Услуги</a>
+            <a href="prices.html">Стоимость</a>
+            <a href="blog.html" class="active">Блог</a>
+        </nav>
+        <button class="theme-toggle-raw" onclick="toggleTheme()" id="themeToggle" title="Переключить тему">☾</button>
+    </div>
+
+    <main class="blog-section">
+        <p class="term-command">
+            <span class="prompt">$</span>ls -la /blog/posts/
+        </p>
+
+        <!-- Цикл вывода статей Jekyll -->
+        {% if site.posts.size > 0 %}
+            {% for post in site.posts %}
+                <div class="service-row" style="margin-bottom: 8px;">
+                    <div class="service-details">
+                        <div class="service-header">
+                            <span class="service-name">
+                                <a href="{{ post.url }}" style="color: var(--text); text-decoration: none;">
+                                    {{ post.title }}
+                                </a>
+                            </span>
+                            <span class="dots"></span>
+                            <span class="service-price" style="font-weight: 400; font-size: 0.85rem; color: var(--text-muted);">
+                                {{ post.date | date: "%d.%m.%Y" }}
+                            </span>
+                        </div>
+                        {% if post.description or post.excerpt %}
+                            <div class="service-desc">
+                                {{ post.description | default: post.excerpt | strip_html | truncate: 140 }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="text-block" style="color: var(--text-muted); padding: 12px 0;">
+                <p><span class="prompt">></span>Записи не найдены. Раздел находится в стадии наполнения...</p>
+            </div>
+        {% endif %}
+    </main>
+
+    <div class="hr-dashed"></div>
+
+    <footer id="contacts">
+        <div class="footer-status">
+            <span class="prompt">$</span>status: <span id="statusIndicator" class="status-online">ONLINE</span> | <span id="year">2026</span> &copy; Сервисный центр "Гагаринский"
+        </div>
+    </footer>
+
+</body>
+</html>
