@@ -74,16 +74,16 @@ permalink: /blog.html
         <!-- Цикл вывода статей Jekyll -->
         {% if site.posts.size > 0 %}
             {% for post in site.posts %}
-                <div class="service-row" style="margin-bottom: 8px;">
+                <div class="blog-card service-row">
                     <div class="service-details">
                         <div class="service-header">
                             <span class="service-name">
-                                <a href="{{ post.url }}" style="color: var(--text); text-decoration: none;">
+                                <a href="{{ post.url }}" class="blog-link">
                                     {{ post.title }}
                                 </a>
                             </span>
                             <span class="dots"></span>
-                            <span class="service-price" style="font-weight: 400; font-size: 0.85rem; color: var(--text-muted);">
+                            <span class="service-price blog-date">
                                 {{ post.date | date: "%d.%m.%Y" }}
                             </span>
                         </div>
@@ -96,7 +96,7 @@ permalink: /blog.html
                 </div>
             {% endfor %}
         {% else %}
-            <div class="text-block" style="color: var(--text-muted); padding: 12px 0;">
+            <div class="text-block empty-posts">
                 <p><span class="prompt">></span>Записи не найдены. Раздел находится в стадии наполнения...</p>
             </div>
         {% endif %}
