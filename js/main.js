@@ -50,9 +50,7 @@ function checkWorkingHours() {
 
     const el = document.getElementById('statusIndicator');
     if (el) {
-        el.textContent = isOpen ? 'ONLINE' : 'OFFLINE';
-        el.classList.toggle('status-online', isOpen);
-        el.classList.toggle('status-offline', !isOpen);
+        el.setAttribute('data-status', isOpen ? 'ONLINE' : 'OFFLINE');
     }
 }
 
