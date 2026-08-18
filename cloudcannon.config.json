@@ -12,7 +12,10 @@
       "path": "posts",
       "output": true,
       "name": "Блог",
-      "icon": "wysiwyg"
+      "icon": "wysiwyg",
+      "add_options": {
+        "ext": ".html"
+      }
     }
   }
 }
