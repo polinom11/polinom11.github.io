@@ -485,10 +485,15 @@ footer {
     flex-wrap: wrap;
 }
 
-/* Вывод статуса через Data-атрибут без задержек */
+/* Индикатор статуса с фиксированной шириной для предотвращения сдвига текста */
+#statusIndicator {
+    display: inline-block;
+    min-width: 7ch; /* Зарезервированное место под 7 символов (OFFLINE) */
+    font-weight: 700;
+}
+
 #statusIndicator::before {
     content: attr(data-status);
-    font-weight: 700;
 }
 
 #statusIndicator[data-status="ONLINE"] {
