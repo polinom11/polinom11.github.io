@@ -331,51 +331,42 @@ details.tui-collapse[open] summary::after {
 }
 
 /* ==========================================================================
-   Оформление статьи (Вариант 2: FAR Manager / TUI Box)
+   Оформление статьи (Вариант 3: Technical Report / Инженерный отчет)
    ========================================================================== */
 
-.tui-window {
-    border: 1px solid var(--border-active);
-    background-color: var(--bg);
-    margin: 20px 0;
-}
-
-.tui-window-header {
+.report-header-box {
+    border: 1px dashed var(--dot-color);
+    padding: 14px 16px;
+    margin: 15px 0 25px 0;
     background-color: var(--bg-nav);
-    padding: 6px 12px;
-    border-bottom: 1px solid var(--border-active);
+    font-size: 0.85rem;
+}
+
+.report-row {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8rem;
-    color: var(--text);
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.report-row:last-child {
+    margin-bottom: 0;
+}
+
+.report-label {
+    color: var(--accent);
     font-weight: 700;
+    min-width: 90px;
+    user-select: none;
 }
 
-.tui-window-title {
-    padding: 16px 16px 12px 16px;
-    border-bottom: 1px dashed var(--dot-color);
-}
-
-.tui-window-title h1 {
-    font-size: 1.25rem;
+.report-val {
     color: var(--text);
-    margin: 0 0 6px 0;
-    line-height: 1.3;
-}
-
-.tui-window-meta {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-}
-
-.tui-window-body {
-    padding: 16px;
 }
 
 .post-content {
     color: var(--text-muted);
     line-height: 1.6;
+    margin: 20px 0;
 }
 
 .post-content p {
@@ -398,10 +389,15 @@ details.tui-collapse[open] summary::after {
 .post-content h4 {
     color: var(--text);
     font-weight: 700;
-    margin: 24px 0 12px 0;
+    margin: 28px 0 12px 0;
 }
 
-.post-content h2 { font-size: 1.15rem; }
+.post-content h2 { 
+    font-size: 1.15rem; 
+    border-bottom: 1px dashed var(--dot-color);
+    padding-bottom: 6px;
+}
+
 .post-content h3 { font-size: 1.05rem; }
 
 .post-content ul, 
@@ -416,8 +412,8 @@ details.tui-collapse[open] summary::after {
 
 .post-content blockquote {
     border-left: 2px solid var(--accent);
-    padding: 8px 12px;
-    margin: 16px 0;
+    padding: 10px 14px;
+    margin: 20px 0;
     color: var(--text-muted);
     background-color: var(--bg-nav);
     font-style: italic;
