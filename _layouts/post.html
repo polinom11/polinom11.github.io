@@ -61,34 +61,45 @@ layout: null
 
     <main class="post-section">
         <p class="term-command">
-            <span class="prompt">$</span>nano /blog/posts/{{ page.path | split: '/' | last }}
+            <span class="prompt">$</span>./parse_report.sh --file="{{ page.path | split: '/' | last }}"
         </p>
 
-        <article class="tui-window">
-            <div class="tui-window-header">
-                <div><span class="prompt">#</span>FILE: {{ page.path | split: '/' | last }}</div>
-                <div>[ {{ page.date | date: "%d.%m.%Y" }} ]</div>
-            </div>
-
-            <div class="tui-window-title">
-                <h1>{{ page.title }}</h1>
+        <article>
+            <div class="report-header-box">
+                <div class="report-row">
+                    <span class="report-label">TITLE:</span>
+                    <span class="report-val" style="font-weight: 700;">{{ page.title }}</span>
+                </div>
+                <div class="report-row">
+                    <span class="report-label">DATE:</span>
+                    <span class="report-val">{{ page.date | date: "%d.%m.%Y" }}</span>
+                </div>
                 {% if page.author %}
-                <div class="tui-window-meta">
-                    <span class="prompt">></span>АВТОР: {{ page.author }}
+                <div class="report-row">
+                    <span class="report-label">AUTHOR:</span>
+                    <span class="report-val">{{ page.author }}</span>
+                </div>
+                {% endif %}
+                {% if page.category %}
+                <div class="report-row">
+                    <span class="report-label">CATEGORY:</span>
+                    <span class="report-val">{{ page.category }}</span>
                 </div>
                 {% endif %}
             </div>
 
-            <div class="tui-window-body post-content">
+            <div class="post-content">
                 {{ content }}
             </div>
-        </article>
 
-        <div style="margin-top: 20px;">
-            <a href="/blog.html" class="back-link">
-                <span class="prompt"><</span> [ ВЕРНУТЬСЯ К СПИСКУ СТАТЕЙ ]
-            </a>
-        </div>
+            <div class="hr-dashed"></div>
+
+            <div style="margin-top: 20px;">
+                <a href="/blog.html" class="back-link">
+                    <span class="prompt"><</span> [ ВЕРНУТЬСЯ К СПИСКУ СТАТЕЙ ]
+                </a>
+            </div>
+        </article>
     </main>
 
     <div class="hr-dashed"></div>
