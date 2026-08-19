@@ -49,7 +49,9 @@
 
         const el = document.getElementById('statusIndicator');
         if (el) {
-            el.setAttribute('data-status', isOpen ? 'ONLINE' : 'OFFLINE');
+            const statusText = isOpen ? 'ONLINE' : 'OFFLINE';
+            el.textContent = statusText; // <-- Вставляет слово ONLINE или OFFLINE
+            el.setAttribute('data-status', statusText);
         }
     }
 
