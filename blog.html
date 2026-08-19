@@ -75,17 +75,17 @@ permalink: /blog.html
             <div class="cli-clean-list">
                 {% for post in site.posts %}
                     <article class="cli-clean-row">
-                        <div class="cli-clean-header">
-                            <span class="cli-date">{{ post.date | date: "%d.%m.%Y" }}</span>
+                        <span class="cli-date">{{ post.date | date: "%d.%m.%Y" }}</span>
+                        <div class="cli-body">
                             <h2 class="cli-title">
                                 <a href="{{ post.url }}">{{ post.title }}</a>
                             </h2>
+                            {% if post.description or post.excerpt %}
+                                <div class="cli-clean-desc">
+                                    {{ post.description | default: post.excerpt | strip_html | truncate: 140 }}
+                                </div>
+                            {% endif %}
                         </div>
-                        {% if post.description or post.excerpt %}
-                            <div class="cli-clean-desc">
-                                {{ post.description | default: post.excerpt | strip_html | truncate: 140 }}
-                            </div>
-                        {% endif %}
                     </article>
                 {% endfor %}
             </div>
@@ -100,7 +100,7 @@ permalink: /blog.html
 
     <footer id="contacts">
         <div class="footer-status">
-             <span class="prompt">$</span><span id="statusContainer" style="display: none;">status: <span id="statusIndicator"></span> | </span><span id="year">2026</span> &copy; Сервисный центр "Гагаринский"
+             <span class="prompt">$</span>status: <span id="statusIndicator">&nbsp;</span> | <span id="year">2026</span> &copy; Сервисный центр "Гагаринский"
         </div>
     </footer>
 
