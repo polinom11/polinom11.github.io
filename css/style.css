@@ -53,6 +53,10 @@ body {
     font-weight: 700;
 }
 
+a {
+    color: var(--accent);
+}
+
 a:focus-visible,
 button:focus-visible,
 details summary:focus-visible {
@@ -76,6 +80,7 @@ details summary:focus-visible {
     color: #b5b5b5;
 }
 
+/* Header & Nav */
 header {
     margin-bottom: 20px;
     text-align: left;
@@ -170,6 +175,159 @@ nav.far-nav a:hover::before, nav.far-nav a.active::before {
     color: var(--accent);
 }
 
+/* Главная страница (index.html) */
+.hero-text {
+    margin-bottom: 20px;
+}
+
+.photo-container {
+    display: block;
+    width: 100%;
+    background: none;
+    padding: 0;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.photo-container img {
+    width: 100%;
+    max-height: 380px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+}
+
+.photo-info-text p {
+    margin-bottom: 4px;
+}
+
+/* Раскрывающиеся блоки (prices.html и services.html) */
+details.tui-collapse {
+    margin-bottom: 14px;
+    border-bottom: 1px dashed var(--dot-color);
+    padding-bottom: 12px;
+}
+
+details.tui-collapse summary {
+    list-style: none;
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--text);
+    user-select: none;
+}
+
+details.tui-collapse summary::-webkit-details-marker {
+    display: none;
+}
+
+details.tui-collapse summary:hover {
+    color: var(--accent);
+}
+
+.collapse-content {
+    padding-top: 12px;
+}
+
+.text-block {
+    margin-bottom: 12px;
+}
+
+/* Таблицы цен и услуг (prices.html и services.html) */
+.rules-list {
+    margin-bottom: 20px;
+}
+
+.rules-list p {
+    margin-bottom: 4px;
+}
+
+.service-row {
+    margin-bottom: 12px;
+}
+
+.service-header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.service-name {
+    font-weight: 700;
+    color: var(--text);
+}
+
+.dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted var(--dot-color);
+}
+
+.service-price {
+    font-weight: 700;
+    color: var(--accent);
+    white-space: nowrap;
+}
+
+.service-desc, .category-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.category-desc {
+    margin-bottom: 12px;
+    font-style: italic;
+}
+
+/* Модальное окно просмотра изображений */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border: 1px solid var(--dot-color);
+    cursor: pointer;
+}
+
+.modal-close {
+    background: transparent;
+    color: var(--accent);
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+/* Раздел Блога (blog.html) */
 .blog-section {
     margin: 25px 0;
 }
@@ -186,7 +344,7 @@ nav.far-nav a:hover::before, nav.far-nav a.active::before {
     gap: 12px;
     padding-bottom: 12px;
     border-bottom: 1px dashed var(--dot-color);
-    align-items: baseline; /* Выравнивание даты и заголовка по базовой линии */
+    align-items: baseline;
 }
 
 .cli-clean-row:last-child {
@@ -236,6 +394,7 @@ nav.far-nav a:hover::before, nav.far-nav a.active::before {
     padding: 12px 0;
 }
 
+/* Footer & Status */
 .hr-dashed {
     margin: 20px 0;
     height: 1px;
