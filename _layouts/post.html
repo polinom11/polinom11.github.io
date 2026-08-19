@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="ru" data-theme="light-red">
 <head>
@@ -68,9 +71,9 @@
                 <span class="prompt">$</span>cat /blog/posts/{{ page.path | split: '/' | last }}
             </p>
 
-            <header class="post-header" style="margin-bottom: 20px;">
-                <h1 style="color: var(--text); font-size: 1.3rem; margin-bottom: 6px;">{{ page.title }}</h1>
-                <div style="font-size: 0.85rem; color: var(--text-muted);">
+            <header class="post-header">
+                <h1>{{ page.title }}</h1>
+                <div class="post-meta">
                     <span class="prompt">></span>ДАТА: {{ page.date | date: "%d.%m.%Y" }}
                     {% if page.author %}
                         | <span class="prompt">></span>АВТОР: {{ page.author }}
@@ -80,15 +83,15 @@
 
             <div class="hr-dashed"></div>
 
-            <!-- Контент статьи Jekyll с оформлением как в "Почему нет общего прайса?" -->
-            <div class="post-content collapse-content" style="padding: 0; margin: 20px 0;">
+            <!-- Контент статьи Jekyll без лишних классов и отступов -->
+            <div class="post-content">
                 {{ content }}
             </div>
 
             <div class="hr-dashed"></div>
 
-            <div style="margin-top: 20px; font-size: 0.85rem;">
-                <a href="/blog.html" style="color: var(--text); text-decoration: none; font-weight: 700;">
+            <div style="margin-top: 20px;">
+                <a href="/blog.html" class="back-link">
                     <span class="prompt"><</span> [ ВЕРНУТЬСЯ К СПИСКУ СТАТЕЙ ]
                 </a>
             </div>
