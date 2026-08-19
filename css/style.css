@@ -331,36 +331,42 @@ details.tui-collapse[open] summary::after {
 }
 
 /* ==========================================================================
-   Оформление статьи (Вариант 3: Technical Report / Инженерный отчет)
+   Оформление отдельной статьи
    ========================================================================== */
 
-.report-header-box {
-    border: 1px dashed var(--dot-color);
-    padding: 14px 16px;
-    margin: 15px 0 25px 0;
-    background-color: var(--bg-nav);
-    font-size: 0.85rem;
-}
-
-.report-row {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 6px;
-}
-
-.report-row:last-child {
-    margin-bottom: 0;
-}
-
-.report-label {
-    color: var(--accent);
+.post-header-title {
+    font-size: 1.35rem;
     font-weight: 700;
-    min-width: 90px;
-    user-select: none;
+    color: var(--text);
+    line-height: 1.3;
+    margin: 10px 0 8px 0;
 }
 
-.report-val {
+.post-meta-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+}
+
+.post-meta-inline .term-time {
+    color: var(--text-muted);
+}
+
+.post-meta-inline .term-tags {
+    color: var(--text-muted);
+}
+
+.post-meta-inline .term-tags a {
     color: var(--text);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.post-meta-inline .term-tags a:hover {
+    color: var(--accent);
 }
 
 .post-content {
@@ -638,7 +644,7 @@ footer {
 
 #statusIndicator {
     display: inline-block;
-    min-width: 7ch; /* Резервирует место под слова "ONLINE"/"OFFLINE" */
+    min-width: 7ch;
     font-weight: 700;
 }
 
