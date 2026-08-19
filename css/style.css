@@ -282,7 +282,7 @@ details.tui-collapse[open] summary::after {
     gap: 12px;
     padding-bottom: 12px;
     border-bottom: 1px dashed var(--dot-color);
-    align-items: start;
+    align-items: baseline;
 }
 
 .cli-clean-row:last-child {
@@ -293,7 +293,7 @@ details.tui-collapse[open] summary::after {
     font-size: 0.85rem;
     color: var(--text-muted);
     white-space: nowrap;
-    padding-top: 2px;
+    padding-top: 0;
 }
 
 .cli-body {
