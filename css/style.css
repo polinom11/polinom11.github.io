@@ -269,72 +269,65 @@ details.tui-collapse[open] summary::after {
     margin-bottom: 0;
 }
 
-/* Оформление списка статей блога (Terminal Cards) */
-.blog-cards-grid {
+/* Оформление списка статей блога (Чистый CLI) */
+.cli-clean-list {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
 }
 
-.post-card-box {
-    position: relative;
-    border: 1px dashed var(--dot-color);
-    padding: 12px 14px;
-    transition: border-color 0.15s ease, background-color 0.15s ease;
+.cli-clean-row {
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--dot-color);
 }
 
-.post-card-box:hover {
-    border: 1px solid var(--border-active);
-    background-color: var(--selection);
+.cli-clean-row:last-child {
+    border-bottom: none;
 }
 
-.post-card-header {
+.cli-clean-header {
     display: flex;
     align-items: baseline;
-    gap: 8px;
-    margin-bottom: 6px;
-    flex-wrap: wrap;
+    gap: 12px;
 }
 
-.post-card-date {
-    font-size: 0.8rem;
+.cli-date {
+    font-size: 0.85rem;
     color: var(--text-muted);
     flex-shrink: 0;
 }
 
-.post-card-title {
+.cli-size {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 700;
+    width: 45px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.cli-title {
     font-size: 0.95rem;
     font-weight: 700;
     margin: 0;
-    color: var(--text);
 }
 
-.post-card-title a {
+.cli-title a {
     color: var(--text);
     text-decoration: none;
     transition: color 0.15s ease;
 }
 
-/* Кликабельность всей карточки через ::after у ссылки */
-.post-card-title a::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-}
-
-.post-card-box:hover .post-card-title a {
+.cli-clean-row:hover .cli-title a {
     color: var(--accent);
 }
 
-.post-card-body {
+.cli-clean-desc {
     font-size: 0.85rem;
     color: var(--text-muted);
+    margin-top: 4px;
+    padding-left: 142px; /* Позиционирование строго под заголовок */
     line-height: 1.4;
-    padding-left: 20px; /* Выравнивание под промпт > */
 }
 
 .empty-posts {
@@ -648,7 +641,16 @@ footer {
     details.tui-collapse[open] summary::after {
         content: "[-]";
     }
-    .post-card-body {
+    .cli-clean-header {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .cli-size {
+        text-align: left;
+        width: auto;
+    }
+    .cli-clean-desc {
         padding-left: 0;
+        margin-top: 6px;
     }
 }
