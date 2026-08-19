@@ -44,7 +44,17 @@ body {
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Стиль обводки при навигации клавишей Tab */
+/* Вспомогательные утилитарные классы */
+.text-sm {
+    font-size: 0.85rem;
+}
+
+.text-bold-accent {
+    color: var(--text);
+    font-weight: 700;
+}
+
+/* Фокус при навигации через Tab */
 a:focus-visible,
 button:focus-visible,
 details summary:focus-visible {
@@ -92,6 +102,7 @@ header {
     text-decoration: none;
 }
 
+/* Навигационная панель */
 .nav-container {
     width: 100%;
     background-color: var(--bg-nav);
@@ -162,6 +173,7 @@ nav.far-nav a:hover::before, nav.far-nav a.active::before {
     color: var(--accent);
 }
 
+/* Секции */
 .hero-text {
     margin: 25px 0;
 }
@@ -177,7 +189,7 @@ nav.far-nav a:hover::before, nav.far-nav a.active::before {
     color: var(--text-muted);
 }
 
-.services-section, .prices-section, .blog-section {
+.services-section, .prices-section, .blog-section, .post-section {
     margin: 25px 0;
 }
 
@@ -243,16 +255,96 @@ details.tui-collapse[open] summary::after {
     background-repeat: repeat-x;
 }
 
+/* Стили текстовых блоков (в аккордеонах) */
 .text-block {
     margin-bottom: 16px;
 }
 
 .text-block p {
     margin-bottom: 12px;
+    color: var(--text-muted);
 }
 
 .text-block p:last-child {
     margin-bottom: 0;
+}
+
+/* Оформление одиночной статьи в блоге (post.html) */
+.post-header h1 {
+    color: var(--text);
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+}
+
+.post-meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.post-content {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 20px 0;
+}
+
+.post-content p {
+    margin-bottom: 16px;
+    color: var(--text-muted);
+}
+
+.post-content strong, 
+.post-content b {
+    color: var(--text);
+    font-weight: 700;
+}
+
+.post-content h2, 
+.post-content h3, 
+.post-content h4 {
+    color: var(--text);
+    font-weight: 700;
+    margin: 24px 0 12px 0;
+}
+
+.post-content h2 { font-size: 1.15rem; }
+.post-content h3 { font-size: 1.05rem; }
+
+.post-content ul, 
+.post-content ol {
+    margin: 12px 0 16px 20px;
+    color: var(--text-muted);
+}
+
+.post-content li {
+    margin-bottom: 6px;
+}
+
+.post-content blockquote {
+    border-left: 2px solid var(--accent);
+    padding-left: 12px;
+    margin: 16px 0;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.post-content a {
+    color: var(--text);
+    text-decoration: underline;
+}
+
+.post-content a:hover {
+    color: var(--accent);
+}
+
+.back-link {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.back-link:hover {
+    color: var(--accent);
 }
 
 .category-desc {
@@ -315,7 +407,7 @@ details.tui-collapse[open] summary::after {
     white-space: nowrap;
 }
 
-/* Кликабельные карточки статей блога */
+/* Кликабельные карточки списка статей блога */
 .blog-card {
     position: relative;
     cursor: pointer;
@@ -351,7 +443,7 @@ details.tui-collapse[open] summary::after {
     padding: 12px 0;
 }
 
-/* Кликабельная миниатюра */
+/* Фото и миниатюра */
 button.photo-container {
     position: relative;
     width: 100%;
@@ -392,7 +484,7 @@ button.photo-container:focus-visible img {
     transform: scale(1.02);
 }
 
-/* Модальное окно */
+/* Модальное окно просмотра фото */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -471,6 +563,7 @@ button.photo-container:focus-visible img {
     background-repeat: repeat-x;
 }
 
+/* Подвал */
 footer {
     margin-top: 8px;
     color: var(--text-muted);
@@ -485,10 +578,9 @@ footer {
     flex-wrap: wrap;
 }
 
-/* Индикатор статуса с фиксированной шириной для предотвращения сдвига текста */
 #statusIndicator {
     display: inline-block;
-    min-width: 7ch; /* Зарезервированное место под 7 символов (OFFLINE) */
+    min-width: 7ch;
     font-weight: 700;
 }
 
@@ -504,6 +596,7 @@ footer {
     color: #ef4444;
 }
 
+/* Адаптив для мобильных устройств */
 @media (max-width: 600px) {
     .nav-container {
         flex-direction: row;
