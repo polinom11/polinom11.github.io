@@ -269,6 +269,79 @@ details.tui-collapse[open] summary::after {
     margin-bottom: 0;
 }
 
+/* Оформление списка статей блога (Terminal Cards) */
+.blog-cards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.post-card-box {
+    position: relative;
+    border: 1px dashed var(--dot-color);
+    padding: 12px 14px;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.post-card-box:hover {
+    border: 1px solid var(--border-active);
+    background-color: var(--selection);
+}
+
+.post-card-header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.post-card-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.post-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text);
+}
+
+.post-card-title a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+/* Кликабельность всей карточки через ::after у ссылки */
+.post-card-title a::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.post-card-box:hover .post-card-title a {
+    color: var(--accent);
+}
+
+.post-card-body {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    padding-left: 20px; /* Выравнивание под промпт > */
+}
+
+.empty-posts {
+    color: var(--text-muted);
+    padding: 12px 0;
+}
+
 /* Оформление одиночной статьи в блоге (post.html) */
 .post-header h1 {
     color: var(--text);
@@ -405,42 +478,6 @@ details.tui-collapse[open] summary::after {
     font-size: 0.9rem;
     color: var(--text);
     white-space: nowrap;
-}
-
-/* Кликабельные карточки списка статей блога */
-.blog-card {
-    position: relative;
-    cursor: pointer;
-}
-
-.blog-card .blog-link {
-    color: var(--text);
-    text-decoration: none;
-}
-
-.blog-card .blog-link::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-}
-
-.blog-card:hover .blog-link {
-    color: var(--accent);
-}
-
-.blog-date {
-    font-weight: 400;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-
-.empty-posts {
-    color: var(--text-muted);
-    padding: 12px 0;
 }
 
 /* Фото и миниатюра */
@@ -584,10 +621,6 @@ footer {
     font-weight: 700;
 }
 
-#statusIndicator::before {
-    content: attr(data-status);
-}
-
 #statusIndicator[data-status="ONLINE"] {
     color: #22c55e;
 }
@@ -614,5 +647,8 @@ footer {
     }
     details.tui-collapse[open] summary::after {
         content: "[-]";
+    }
+    .post-card-body {
+        padding-left: 0;
     }
 }
