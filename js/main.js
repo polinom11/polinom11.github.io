@@ -1,20 +1,16 @@
 (function() {
     let lastFocusedElement = null;
 
-    function init() {
+    document.addEventListener('DOMContentLoaded', () => {
+        // Установка года (если не используете {{ "now" | date: "%Y" }} в Jekyll)
         const yearEl = document.getElementById('year');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
 
         syncThemeUI();
         checkWorkingHours();
-    }
+    });
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
-
+    // Синхронизация и переключение темы
     window.syncThemeUI = function() {
         const isLight = document.documentElement.getAttribute('data-theme') === 'light-red';
         const btn = document.getElementById('themeToggle');
@@ -37,6 +33,7 @@
         syncThemeUI();
     };
 
+    // Расчет статуса работы
     function checkWorkingHours() {
         const now = new Date();
         const day = now.getDay(); 
@@ -53,11 +50,12 @@
         const el = document.getElementById('statusIndicator');
         if (el) {
             const statusText = isOpen ? 'ONLINE' : 'OFFLINE';
-            el.textContent = statusText;
+            el.textContent = statusText; // <-- Вставляет слово ONLINE или OFFLINE
             el.setAttribute('data-status', statusText);
         }
     }
 
+    // Управление модальным окном просмотрщика фото
     window.openModal = function(imgSrc) {
         lastFocusedElement = document.activeElement;
         const modal = document.getElementById('imageModal');
@@ -85,6 +83,7 @@
         }
     };
 
+    // Закрытие по Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModal();
     });
