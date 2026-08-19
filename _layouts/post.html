@@ -14,26 +14,6 @@ layout: null
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:title" content="{{ page.title }} | Сервисный центр 'Гагаринский'">
-    <meta property="og:description" content="{{ page.description | default: page.excerpt | strip_html | truncate: 160 }}">
-    <meta property="og:image" content="{{ page.image | default: '/images/og-preview.jpg' | absolute_url }}">
-	
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){
-            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111581561', 'ym');
-
-        ym(111581561, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/111581561" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-   
     <link rel="stylesheet" href="/css/style.css">
 
     <script>
@@ -72,18 +52,16 @@ layout: null
             </p>
 
             <header class="post-header">
-                <h1>{{ page.title }}</h1>
-                <div class="post-meta">
-                    <span class="prompt">></span>ДАТА: {{ page.date | date: "%d.%m.%Y" }}
-                    {% if page.author %}
-                        | <span class="prompt">></span>АВТОР: {{ page.author }}
-                    {% endif %}
+                <div class="post-meta" style="margin-bottom: 8px;">
+                    <span class="prompt">></span>[{{ page.date | date: "%d.%m.%Y" }}]
+                    {% if page.author %} | <span class="prompt">></span>АВТОР: {{ page.author }}{% endif %}
+                    {% if page.category %} | <span class="prompt">></span>КАТЕГОРИЯ: {{ page.category }}{% endif %}
                 </div>
+                <h1>{{ page.title }}</h1>
             </header>
 
             <div class="hr-dashed"></div>
 
-            <!-- Контент статьи Jekyll без лишних классов и отступов -->
             <div class="post-content">
                 {{ content }}
             </div>
