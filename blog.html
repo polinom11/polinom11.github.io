@@ -77,10 +77,6 @@ permalink: /blog.html
                     <article class="cli-clean-row">
                         <div class="cli-clean-header">
                             <span class="cli-date">{{ post.date | date: "%d.%m.%Y" }}</span>
-                            <span class="cli-size">
-                                {% assign words = post.content | strip_html | number_of_words %}
-                                {% if words > 300 %}{{ words | divided_by: 100 }}k{% else %}{{ words }}b{% endif %}
-                            </span>
                             <h2 class="cli-title">
                                 <a href="{{ post.url }}">{{ post.title }}</a>
                             </h2>
@@ -104,7 +100,7 @@ permalink: /blog.html
 
     <footer id="contacts">
         <div class="footer-status">
-             <span class="prompt">$</span>status: <span id="statusIndicator"></span> | <span id="year">2026</span> &copy; Сервисный центр "Гагаринский"
+             <span class="prompt">$</span><span id="statusContainer" style="display: none;">status: <span id="statusIndicator"></span> | </span><span id="year">2026</span> &copy; Сервисный центр "Гагаринский"
         </div>
     </footer>
 
