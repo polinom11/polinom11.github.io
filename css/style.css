@@ -295,15 +295,7 @@ details.tui-collapse[open] summary::after {
     font-size: 0.85rem;
     color: var(--text-muted);
     flex-shrink: 0;
-}
-
-.cli-size {
-    font-size: 0.8rem;
-    color: var(--accent);
-    font-weight: 700;
-    width: 45px;
-    text-align: right;
-    flex-shrink: 0;
+    width: 85px;
 }
 
 .cli-title {
@@ -326,7 +318,7 @@ details.tui-collapse[open] summary::after {
     font-size: 0.85rem;
     color: var(--text-muted);
     margin-top: 4px;
-    padding-left: 142px; /* Позиционирование строго под заголовок */
+    padding-left: 97px;
     line-height: 1.4;
 }
 
@@ -642,15 +634,14 @@ footer {
         content: "[-]";
     }
     .cli-clean-header {
-        flex-wrap: wrap;
-        gap: 6px;
+        flex-direction: column;
+        gap: 2px;
     }
-    .cli-size {
-        text-align: left;
+    .cli-date {
         width: auto;
     }
     .cli-clean-desc {
         padding-left: 0;
-        margin-top: 6px;
+        margin-top: 4px;
     }
 }
