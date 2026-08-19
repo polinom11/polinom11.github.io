@@ -68,23 +68,26 @@ permalink: /blog.html
 
     <main class="blog-section">
         <p class="term-command">
-            <span class="prompt">$</span>cat /blog/posts/index.db
+            <span class="prompt">$</span>ls -lh /blog/posts/
         </p>
 
         {% if site.posts.size > 0 %}
-            <div class="blog-cards-grid">
+            <div class="cli-clean-list">
                 {% for post in site.posts %}
-                    <article class="post-card-box">
-                        <div class="post-card-header">
-                            <span class="prompt">></span>
-                            <span class="post-card-date">{{ post.date | date: "%d.%m.%Y" }}</span>
-                            <h2 class="post-card-title">
+                    <article class="cli-clean-row">
+                        <div class="cli-clean-header">
+                            <span class="cli-date">{{ post.date | date: "%d.%m.%Y" }}</span>
+                            <span class="cli-size">
+                                {% assign words = post.content | strip_html | number_of_words %}
+                                {% if words > 300 %}{{ words | divided_by: 100 }}k{% else %}{{ words }}b{% endif %}
+                            </span>
+                            <h2 class="cli-title">
                                 <a href="{{ post.url }}">{{ post.title }}</a>
                             </h2>
                         </div>
                         {% if post.description or post.excerpt %}
-                            <div class="post-card-body">
-                                {{ post.description | default: post.excerpt | strip_html | truncate: 150 }}
+                            <div class="cli-clean-desc">
+                                {{ post.description | default: post.excerpt | strip_html | truncate: 140 }}
                             </div>
                         {% endif %}
                     </article>
