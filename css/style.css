@@ -425,6 +425,34 @@ details.tui-collapse[open] summary::after {
     font-style: italic;
 }
 
+/* --- Оформление таблиц в статьях --- */
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.88rem;
+    word-break: break-word;
+}
+
+.post-content th,
+.post-content td {
+    padding: 8px 12px;
+    border: 1px dashed var(--dot-color);
+    text-align: left;
+    vertical-align: top;
+}
+
+.post-content th {
+    background-color: var(--bg-nav);
+    color: var(--text);
+    font-weight: 700;
+}
+
+.post-content tr:hover {
+    background-color: var(--selection);
+}
+/* ---------------------------------- */
+
 .post-content a {
     color: var(--text);
     text-decoration: underline;
@@ -678,5 +706,12 @@ footer {
     .cli-clean-row {
         grid-template-columns: 1fr;
         gap: 4px;
+    }
+    .post-content table {
+        font-size: 0.8rem;
+    }
+    .post-content th,
+    .post-content td {
+        padding: 6px 8px;
     }
 }
