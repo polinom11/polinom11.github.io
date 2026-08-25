@@ -1,7 +1,7 @@
 # Основные настройки сайта
 title: "Gagarin35.ru"
 description: "Блог и новости проекта Gagarin35"
-url: "https://Gagarin35.ru" # Намените на ваш итоговый домен
+url: "https://gagarin35.ru" # Для seo рекомендуется нижний регистр
 
 # Настройки генерации страниц и Markdown
 markdown: kramdown
