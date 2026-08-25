@@ -1,12 +1,17 @@
 # Основные настройки сайта
 title: "Gagarin35.ru"
-description: "Блог и новости проекта Gagarin35"
+description: "Блог сервисного центра Гагаринский"
 url: "https://gagarin35.ru" # Для seo рекомендуется нижний регистр
 
 # Настройки генерации страниц и Markdown
 markdown: kramdown
 highlighter: rouge
 permalink: /blog/:title/
+
+# Подключенные плагины для SEO
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
 # Исключения (файлы и папки, которые Jekyll НЕ должен обрабатывать как страницы)
 exclude:
